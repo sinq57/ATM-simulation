@@ -37,6 +37,7 @@ public:
 	void loading();
 	void goToXY(int x, int y);
 	void printInsideFrame(string, int);
+	void deleteInsideFrame();
 
 private:
 };

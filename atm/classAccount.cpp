@@ -3,20 +3,20 @@ using namespace std;
 
 Account::Account()
 {
-	blockedAmount = 0;
+	blockState = 0;
 	cardId = "";
 	pin = "0";
 	balance = 0;
 }
 
-void Account::setBlockedAmount(int a)
+void Account::setBlockState(int a)
 {
-	blockedAmount = a;
+	blockState = a;
 }
 
-int Account::getBlockedAmount()
+int Account::getBlockState()
 {
-	return blockedAmount;
+	return blockState;
 }
 void Account::setBalance(int a)
 {

@@ -7,8 +7,8 @@ class Account
 {
 public:
 	Account();
-	void setBlockedAmount(int);
-	int getBlockedAmount();
+	void setBlockState(int);
+	int getBlockState();
 
 	void setCardId(string);
 	string getCardId();
@@ -19,10 +19,8 @@ public:
 	void setBalance(int);
 	double getBalance();
 private:
-	int blockedAmount;
+	int blockState;  // '1': blocked
 	string cardId;
 	string pin;
 	double balance;
 };
-
-class example;

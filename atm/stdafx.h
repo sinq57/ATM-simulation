@@ -20,6 +20,8 @@
 #include <fstream>
 #include <conio.h>
 #include <windows.h>
+#include <iomanip>
+#include <cmath>
 
 #include "hardware.h"
 #include "classMoney.h"

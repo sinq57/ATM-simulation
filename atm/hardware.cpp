@@ -2,6 +2,9 @@
 
 using namespace std;
 
+Keyboard::Keyboard()
+{
+}
 
 int Keyboard::getInt()
 {
@@ -154,6 +157,11 @@ void Screen::printInsideFrame(string a, int line)
 	dataOut(a);
 }
 
+void Screen::deleteInsideFrame()
+{
+	for (int i = 6; i <= 12; i++)
+		printInsideFrame("                                          ", i);
+}
 
 void Screen::loading()  // time emulator for reading card and executing transaction 
 {
