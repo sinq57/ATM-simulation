@@ -215,7 +215,92 @@ void BankDatabase::checkBalance(string id)
 	}
 }
 
-void BankDatabase::transfer()
+
+void BankDatabase::transfer(string id)
 {
 	//.....
+	Screen screen;
+	Keyboard keyboard;
+	CardReader cardReader;
+	for (int i = 1; i <= this->getAccountQuantity(); i++)
+	{
+		if (accountArray[i].getCardId() == id)
+		{
+			string receiver;
+			LABEL1:
+			screen.deleteInsideFrame();
+			screen.printInsideFrame("    GIVE CARD ID OF RECEIVER :", 6);
+			keyboard.dataIn(receiver);
+			if (receiver == id)
+			{
+				screen.printInsideFrame("   CANNOT TRANSFER TO YOUR ACCOUNT !", 8);
+				screen.printInsideFrame("     CONTINUE OR CANCEL TRANSACTION? (Y/N)", 10);
+				int z = keyboard.getInt();
+				if (z == 'Y' || z == 'y') {
+					goto LABEL1;
+				}
+				for (int j = 1; j <= this->getAccountQuantity(); j++)
+				{
+					if (accountArray[j].getCardId() == receiver)
+					{
+					LABEL2:
+						screen.deleteInsideFrame();
+						Sleep(300);
+						screen.printInsideFrame("     ENTER AMOUNT YOU WANT TO TRANSFER" ,8);
+						double amount;
+						keyboard.dataIn(amount);
+						if (amount > accountArray[i].getBalance())
+						{
+							screen.printInsideFrame("     YOU DON NOT HAVE ENOUGH MONEY !!!", 10);
+							screen.printInsideFrame("     CONTINUE OR CANCEL TRANSACTION? (Y/N)", 12);
+							z = keyboard.getInt();
+							if (z == 'Y' || z == 'y') goto LABEL2;
+							else
+							{
+								screen.deleteInsideFrame();
+								screen.printInsideFrame("	  YOU CANCELED TRANSFER !", 10);
+								screen.printInsideFrame("         CONTINUE ? (Y/N) ", 12);
+								return;
+							}
+							
+						}
+						else
+						{
+							screen.loading();
+							screen.deleteInsideFrame();
+							screen.printInsideFrame("     TRANSACTION SUCCEEDED !!!", 10);
+							screen.printInsideFrame("     CONTINUE ? (Y/N)", 12);
+							accountArray[i].setBalance(accountArray[i].getBalance - amount);
+							accountArray[j].setBalance(accountArray[j].getBalance + amount);
+							updateAccount();
+
+							// tramsaction history ????? 
+							return;
+						}
+					}
+					
+				}
+
+				screen.loading();
+				screen.printInsideFrame("    NO SUCH ACCOUNT FOUND !!! ",8);
+				screen.printInsideFrame("    CONTINUE OR CANCEL ? (Y/N) ",10);
+				int s = keyboard.getInt();
+				if (s == 'Y' || s == 'y') {
+					goto LABEL1;
+				}
+				else
+				{
+					screen.printInsideFrame("	  YOU CANCELED TRANSFER !", 8);
+					screen.printInsideFrame("    CONTINUE OR CANCEL ? (Y/N) ", 10);
+					return;
+				}
+			}
+		}
+	}
+}
+
+void BankDatabase::withdraw()
+{
+	Screen screen;
+
 }

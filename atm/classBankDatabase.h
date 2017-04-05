@@ -13,7 +13,7 @@ public:
 	int getAccountQuantity();
 	void substractMoney(string id, double moneyAmount);
 	void changePin(string pin);
-	void transfer();
+	void transfer(string id);
 	Account accountArray[1000];
 private:
 	int accountQuantity;
