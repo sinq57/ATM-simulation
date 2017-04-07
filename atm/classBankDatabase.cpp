@@ -9,6 +9,11 @@ BankDatabase::BankDatabase()
 
 }
 
+Account* BankDatabase::getAccountArray()
+{
+	return accountArray;
+}
+
 int BankDatabase::getAccountQuantity()
 {
 	return accountQuantity;
@@ -18,7 +23,7 @@ bool BankDatabase::checkPin(string id, string pin )
 {
 	for (int i = 1; i <= accountQuantity; i++)
 	{
-		if (accountArray[i].getPin() == pin && accountArray[i].getCardId() == id)
+		if ((getAccountArray() + i)->getPin() == pin && (getAccountArray() + i)->getCardId() == id)
 			return true;
 	}
 	return false;
@@ -39,10 +44,10 @@ void BankDatabase::createAccountArray()
 		{
 			i++;
 			f_acc >> id >> pin >> balance >> blockState;
-			accountArray[i].setPin(pin);
-			accountArray[i].setCardId(id);
-			accountArray[i].setBalance(balance);
-			accountArray[i].setBlockState(blockState);
+			(getAccountArray() + i)->setPin(pin);
+			(getAccountArray() + i)->setCardId(id);
+			(getAccountArray() + i)->setBalance(balance);
+			(getAccountArray() + i)->setBlockState(blockState);
 		}
 		accountQuantity = i;
 		f_acc.close();
@@ -64,7 +69,7 @@ void BankDatabase::changePin(string id)
 	Keyboard keyboard;
 	for (int i = 1; i <= getAccountQuantity(); i++)
 	{
-		if (accountArray[i].getCardId() == id)
+		if ((getAccountArray() + i)->getCardId() == id)
 		{
 			int tryLimit(3);
 		LABEL1:
@@ -78,7 +83,7 @@ void BankDatabase::changePin(string id)
 			}
 			keyboard.getInt();
 			screen.loading();
-			if (accountArray[i].getPin() == oldPin)
+			if ((getAccountArray() + i)->getPin() == oldPin)
 			{
 				screen.printInsideFrame("          ACCEPTED PIN !  ", 10);
 				Sleep(1500);
@@ -104,7 +109,7 @@ void BankDatabase::changePin(string id)
 				{
 					screen.printInsideFrame("           DOI MA PIN THANH CONG !  ", 10);
 					screen.printInsideFrame("         TIEP TUC GIAO DICH ? (Y/N) ", 12);
-					accountArray[i].setPin(newPin1);
+					(getAccountArray() + i)->setPin(newPin1);
 					updateAccount();
 					TransactionHistory transactionHistory;
 					transactionHistory.saveTransaction();
@@ -152,7 +157,7 @@ void BankDatabase::changePin(string id)
 				else
 				{
 					screen.printInsideFrame("	EXCEED TRY LIMIT, ACCOUNT BLOCKED ! \a", 10);
-					accountArray[i].setBlockState(1);
+					(getAccountArray() + i)->setBlockState(1);
 					updateAccount();
 					screen.printInsideFrame("   CONTACK BANK TO RECEIVE CARD ! \a", 12);
 					//	p.hienThi("|     NUOT THE     |\n");
@@ -169,7 +174,7 @@ void BankDatabase::updateAccount()
 	ofstream f_acc("ClientAccount.txt"); // write to file
 	for (int i = 0; i <= accountQuantity; i++)
 	{
-		f_acc << accountArray[i].getCardId() << " " << accountArray[i].getPin() << " " << accountArray[i].getBalance() << " " << accountArray[i].getBlockState() << endl;
+		f_acc << (getAccountArray() + i)->getCardId() << " " << (getAccountArray() + i)->getPin() << " " << (getAccountArray() + i)->getBalance() << " " << (getAccountArray() + i)->getBlockState() << endl;
 	}
 	f_acc.close();
 }
@@ -178,7 +183,7 @@ bool BankDatabase::haveAccount(string id)
 {
 	for (int i = 1; i <= accountQuantity; i++)
 	{
-		if (this->accountArray[i].getCardId() == id)
+		if ((getAccountArray() + i)->getCardId() == id)
 			return true;
 	}
 	return false;
@@ -188,9 +193,9 @@ void BankDatabase::substractMoney(string id, double moneyAmount)
 {
 	for (int i = 1; i <= this->getAccountQuantity(); i++)
 	{
-		if (accountArray[i].getCardId() == id)
+		if ((getAccountArray() + i)->getCardId() == id)
 		{
-			accountArray[i].setBalance(accountArray[i].getBalance() - moneyAmount);
+			(getAccountArray() + i)->setBalance((getAccountArray() + i)->getBalance() - moneyAmount);
 			updateAccount();
 			return;
 		}
@@ -204,10 +209,10 @@ void BankDatabase::checkBalance(string id)
 	screen.loading();
 	for (int i = 1; i <= getAccountQuantity(); i++)
 	{
-		if (accountArray[i].getCardId() == id)
+		if ((getAccountArray() + i)->getCardId() == id)
 		{
 			screen.printInsideFrame("         YOUR BALANCE:   ", 8);
-			cout << fixed << setw(5) << setprecision(2) << accountArray[i].getBalance() << " $\n";
+			cout << fixed << setw(5) << setprecision(2) << (getAccountArray() + i)->getBalance() << " $\n";
 			screen.printInsideFrame("         CONTINUE TRANSACTION ? (Y/N) ", 10);
 			transactionHistory.saveTransaction();
 			// can bo sung phan nhat ki
@@ -224,7 +229,7 @@ void BankDatabase::transfer(string id)
 	CardReader cardReader;
 	for (int i = 1; i <= this->getAccountQuantity(); i++)
 	{
-		if (accountArray[i].getCardId() == id)
+		if ((getAccountArray() + i)->getCardId() == id)
 		{
 			string receiver;
 			LABEL1:
@@ -241,7 +246,7 @@ void BankDatabase::transfer(string id)
 				}
 				for (int j = 1; j <= this->getAccountQuantity(); j++)
 				{
-					if (accountArray[j].getCardId() == receiver)
+					if ((getAccountArray() + j)->getCardId() == receiver)
 					{
 					LABEL2:
 						screen.deleteInsideFrame();
@@ -249,7 +254,7 @@ void BankDatabase::transfer(string id)
 						screen.printInsideFrame("     ENTER AMOUNT YOU WANT TO TRANSFER" ,8);
 						double amount;
 						keyboard.dataIn(amount);
-						if (amount > accountArray[i].getBalance())
+						if (amount > (getAccountArray() + i)->getBalance())
 						{
 							screen.printInsideFrame("     YOU DON NOT HAVE ENOUGH MONEY !!!", 10);
 							screen.printInsideFrame("     CONTINUE OR CANCEL TRANSACTION? (Y/N)", 12);
@@ -270,8 +275,8 @@ void BankDatabase::transfer(string id)
 							screen.deleteInsideFrame();
 							screen.printInsideFrame("     TRANSACTION SUCCEEDED !!!", 10);
 							screen.printInsideFrame("     CONTINUE ? (Y/N)", 12);
-							accountArray[i].setBalance(accountArray[i].getBalance - amount);
-							accountArray[j].setBalance(accountArray[j].getBalance + amount);
+							(getAccountArray() + i)->setBalance((getAccountArray() + i)->getBalance() - amount);
+							(getAccountArray() + j)->setBalance((getAccountArray() + j)->getBalance() + amount);
 							updateAccount();
 
 							// tramsaction history ????? 
@@ -299,8 +304,78 @@ void BankDatabase::transfer(string id)
 	}
 }
 
-void BankDatabase::withdraw()
+void BankDatabase::withdraw(string id, CashBox cashBox)
 {
 	Screen screen;
+	Keyboard keyboard;
+	Bill bill;
+	double withdrawAmount;
+	int withdrawnMoneyArray[10];
+	Money* moneyArrayPtr = cashBox.getMoneyArray();
+	//Account* accountArrayPtr = getAccountArray();
+
+
+	for (int i = 1; i <= accountQuantity; i++)
+	{
+		if ((getAccountArray() + i)->getCardId() == id)
+		{
+			//
+			int moneyLeft = (getAccountArray() + i)->getBalance();
+		LABEL1:
+			screen.deleteInsideFrame();
+			screen.printInsideFrame("    WITHDRAW TRAMSACTION:", 6);
+			screen.printInsideFrame("     ENTER MONEY AMOUNT", 8);
+			keyboard.dataIn(withdrawAmount);
+			double intPart;  // must use 'modf' because "%" (mod) is olny for int
+			double fractPart = modf(withdrawAmount, &intPart);
+			if (fractPart != 0)
+			{
+				goto LABEL1;
+
+			}
+			screen.loading();
+			if (withdrawAmount > cashBox.totalMoney())
+			{
+
+			}
+			else
+			{
+				if (withdrawAmount > moneyLeft)
+				{
+
+				}
+				else
+				{
+					screen.deleteInsideFrame();
+					screen.printInsideFrame("    WITHDRAW SUCCESS :)", 6);
+					screen.printInsideFrame("         ", 8);
+					moneyLeft -= withdrawAmount;
+					for (int j = 0; j < cashBox.getDenominationNumber(); j++) withdrawnMoneyArray[j] = 0;
+					for (int j = 0; j < cashBox.getDenominationNumber(); j++)
+					{
+						while ((moneyArrayPtr + j)->getDenomination() <= withdrawAmount && (moneyArrayPtr + j)->getNumber() > 0 && withdrawAmount > 0)
+						{
+							withdrawAmount -= (moneyArrayPtr + j)->getDenomination();
+							withdrawnMoneyArray[j]++;
+						}
+					}
+					for (int j = 0; j < cashBox.getDenominationNumber(); j++)
+					{
+						screen.dataOut((moneyArrayPtr + j)->getDenomination());
+						screen.dataOut("$: ");
+						screen.dataOut(withdrawnMoneyArray[j]);
+						screen.dataOut("   ");
+
+					}
+					(getAccountArray() + i)->setBalance(moneyLeft);
+					screen.printInsideFrame("    CONTINUE TRANSACTION ? (Y/N)",10);
+					//LUU NHAT KI GIAO DICH
+
+				}
+			}
+		}
+		
+	}
 
 }
+

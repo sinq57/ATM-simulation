@@ -45,15 +45,17 @@ private:
 class CashBox
 {
 public:
-	Money moneyArray[10];
+	
 	CashBox();
 	void makeMoneyArray();
-	void getDenominationNumber();
-	long moneyTotal();
+	int getDenominationNumber();
+	long totalMoney();
 	void updateMoney();
+	Money* getMoneyArray();
 	~CashBox();
 private:
-	int DenominationNumber;
+	int denominationNumber;
+	Money moneyArray[10];
 };
 
 class CardReader

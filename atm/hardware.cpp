@@ -193,15 +193,15 @@ void CashBox::makeMoneyArray()
 			moneyArray[count].setNumber(number);
 			
 		}
-		DenominationNumber = count;
+		denominationNumber = count;
 		f_money.close();
 	}
 }
 
-long CashBox::moneyTotal()
+long CashBox::totalMoney()
 {
 	long sum = 0;
-	for (int i = 0; i <= DenominationNumber; i++)
+	for (int i = 0; i <= denominationNumber; i++)
 		sum += moneyArray[i].getDenomination()*moneyArray[i].getNumber();
 	return sum;
 }
@@ -209,11 +209,20 @@ long CashBox::moneyTotal()
 void CashBox::updateMoney()
 {
 	ofstream f_money("MoneyInBank.txt");
-	for (int i = 1; i <= DenominationNumber; i++)
+	for (int i = 1; i <= denominationNumber; i++)
 		f_money << moneyArray[i].getDenomination() << " " << moneyArray[i].getNumber() << endl;
 	f_money.close();
 }
 
+Money* CashBox::getMoneyArray()
+{
+	return moneyArray;
+}
+
+int CashBox::getDenominationNumber()
+{
+	return denominationNumber;
+}
 
 CardReader::CardReader()
 {
