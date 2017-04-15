@@ -2,10 +2,14 @@
 //
 
 #include "stdafx.h"
-
+//ofstream f_acc("ClientAccount.txt");
 
 int main()
 {
-    return 0;
+	Atm atm;
+	atm.run();
+	Sleep(1000);
+	//f_acc.close();
+	return 0;
 }
 

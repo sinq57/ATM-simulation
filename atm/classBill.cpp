@@ -7,14 +7,14 @@ Bill::Bill()
 
 }
 
-void Bill::printBill()
+void Bill::print()
 {
 	Screen screen;
 	int count = 0;
 	char a[1000];
 	screen.loading();
 	screen.clearScreen();
-	ifstream f_in("BillBuffer.txt");
+	ifstream f_in("BillBuffer.txt");   // 
 	while (!f_in.eof()) {
 		f_in.getline(a, 1000);
 		count++;
@@ -32,5 +32,6 @@ void Bill::printBill()
 			screen.dataOut(a);
 			screen.dataOut("\n");
 		}
+		f_in.close();
 	}
 }

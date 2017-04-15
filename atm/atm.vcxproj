@@ -29,7 +29,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -142,10 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="ClientAccount.txt" />
+    <Text Include="MoneyInBank.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classAccount.h" />
+    <ClInclude Include="classAtm.h" />
     <ClInclude Include="classBankDatabase.h" />
     <ClInclude Include="classBill.h" />
     <ClInclude Include="classMoney.h" />
@@ -156,7 +159,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="atm.cpp" />
+    <ClCompile Include="classAtm.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="classAccount.cpp" />
     <ClCompile Include="classBankDatabase.cpp" />
     <ClCompile Include="classBill.cpp" />

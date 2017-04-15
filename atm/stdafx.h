@@ -30,3 +30,4 @@
 #include "classBill.h"
 #include "classTransaction.h"
 #include "classBankDatabase.h"
+#include "classAtm.h"
