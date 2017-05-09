@@ -59,66 +59,66 @@ void Screen::display(string a, string b)
 	system("color 67");
 	dataOut( "\n");
 	decorate();
-	dataOut( " |                             WELCOME TO WBK BANK                            | \n");
+	dataOut( "|                           WELCOME TO WBK BANK                           | \n");
 	decorate();
-	dataOut( " ");
-	for (int i=1; i<=16; i++) dataOut( "-");
+	dataOut( "|");
+	for (int i=1; i<=13; i++) dataOut( "-");
 	dataOut( "  ");
 	for (int i=1; i<=42; i++) dataOut( "-");
 	dataOut( "  ");
-	for (int i=1; i<=16; i++) dataOut( "-");
-	dataOut( "\n | RUT TIEN - 1 | |");
+	for (int i=1; i<=14; i++) dataOut( "-");
+	dataOut("|");
+	dataOut( "\n| WITHDRAW - 1 |");
 	for (int i=1; i<=42; i++) dataOut( " ");
-	dataOut( "| | 2-CHUYEN TIEN|\n");
+	dataOut( "| 2 - TRANSFER  |\n");
 	printDash();
 	//dataOut( " ");
 	printDash();
-	dataOut( " |THANH TOAN- 3 | |");
+	dataOut( "| PAY TOOL - 3 |");
 	dataOut( a );
-	dataOut( "| | 4-MUA THE NAP|\n");
+	dataOut( "| 4 -  POPUP    |\n");
 	printDash();
 	//dataOut( " ");
 	printDash();
-	dataOut( " |XEM SO DU - 5 | |");
+	dataOut( "| BALANCE  - 5 |");
 	dataOut( b );
-	dataOut( "| | 6-DOI MA PIN |\n");
+	dataOut( "| 6 -CHANGE PIN |\n");
 	printDash();
 	//dataOut( " ");
 	printDash();
-	dataOut( " |IN SAO KE - 7 | |");
+	dataOut( "|   BILL   - 7 |");
 	for (int i=1; i<=42; i++) dataOut( " ");
-	dataOut( "| | 0 - THOAT !  |");
-	dataOut( "  \n");
-	for (int i=1; i<=16; i++) dataOut( "-");
+	dataOut( "|  0 - EXIT !   |");
+	dataOut( "\n|");
+	for (int i=1; i<=13; i++) dataOut( "-");
 	dataOut( "  ");
 	for (int i=1; i<=42; i++) dataOut( "-");
 	dataOut( "  ");
-	for (int i=1; i<=16; i++) dataOut( "-");
-	dataOut( " ");
-	dataOut( "\n");
-	dataOut("\n");
-	dataOut( " -------------------------------  -------------  -----------------------------\n");
-	dataOut( " |                              |  | 1 | 2 | 3 |  |         WBK BANK          |\n");
-	dataOut( " |                              |  -------------  |                           |\n");
-	dataOut( " |      |----------------|      |  | 4 | 5 | 6 |  |            WE             |\n");
-	dataOut( " |      |  INSERT CARD   |      |  -------------  |                           |\n");
-	dataOut( " |      |  -----------   |      |  | 7 | 8 | 9 |  |        WILL HOLD          |\n");
-	dataOut( " |      |     HELLO      |      |  -------------  |                           |\n");
-	dataOut( " |      |----------------|      |  | Y | 0 | N |  |        YOUR TRUST         |\n");
-	dataOut( " |                              |  -------------  |                           |\n");
-	dataOut( " -------------------------------  ---------------  ---------------------------\n");
+	for (int i=1; i<=14; i++) dataOut( "-");
+	//dataOut( " ");
+	dataOut("|\n\n");
+	dataOut( " ----------------------------  ----------------  ------------------------- \n");
+	dataOut( "|                            |  | 1 | 2 | 3 |  |         WBK BANK         |\n");
+	dataOut( "|                            |  -------------  |                          |\n");
+	dataOut( "|     |----------------|     |  | 4 | 5 | 6 |  |            WE            |\n");
+	dataOut( "|     |  INSERT CARD   |     |  -------------  |                          |\n");
+	dataOut( "|     |  -----------   |     |  | 7 | 8 | 9 |  |        WILL HOLD         |\n");
+	dataOut( "|     |     HELLO      |     |  -------------  |                          |\n");
+	dataOut( "|     |----------------|     |  | Y | 0 | N |  |        YOUR TRUST        |\n");
+	dataOut( "|                            |  -------------  |                          |\n");
+	dataOut( " ----------------------------  ---------------  --------------------------\n");
 	decorate();
-	dataOut( " |                            THANK FOR TRANSACTIONS                          | \n");
-	decorate();
+	dataOut( "|                        THANK FOR USING OUR SERVICES                     |\n");
+	decorate();  
 	for (int i=1; i<=40; i++) dataOut( " ");
 }
 
 void Screen::decorate()
 {
-	dataOut(" ");
-	for(int i = 1; i <= 78; i++)
+	dataOut("|");
+	for(int i = 1; i <= 73; i++)
 		dataOut("-");
-	dataOut(" \n");
+	dataOut("|\n");
 }
 
 void Screen::makeBackgroundColor()
@@ -128,16 +128,16 @@ void Screen::makeBackgroundColor()
 
 void Screen::printDash()
 {
-	dataOut(" ");
-	for (int i = 1; i <= 16; i++)
+	dataOut("|");
+	for (int i = 1; i <= 14; i++)
 		dataOut("-");
-	dataOut(" |");
+	dataOut("|");
 	for (int i = 1; i <= 42; i++)
 		dataOut(" ");
-	dataOut("| ");
-	for (int i = 1; i <= 16; i++)
+	dataOut("|");
+	for (int i = 1; i <= 15; i++)
 		dataOut("-");
-	dataOut(" \n");
+	dataOut("|\n");
 }
 
 void Screen::clearScreen()
@@ -154,7 +154,7 @@ void Screen::goToXY(int x, int y) {
 
 void Screen::printInsideFrame(string a, int line)
 {
-	goToXY(19, line);
+	goToXY(16, line);
 	dataOut(a);
 }
 
@@ -234,16 +234,16 @@ void CardReader::display(string a)
 {
 	Screen screen;
 	for (int i = 1; i <= 5; i++) {
-		screen.goToXY(8, 23);
+		screen.goToXY(6, 23);
 		screen.dataOut(a);
 		Sleep(200);
-		screen.goToXY(8, 23);
+		screen.goToXY(6, 23);
 		screen.dataOut("|                |");
 		Sleep(200);
-		screen.goToXY(8, 23);
+		screen.goToXY(6, 23);
 		screen.dataOut(a);
 		Sleep(200);
-		screen.goToXY(8, 23);
+		screen.goToXY(6, 23);
 		screen.dataOut("|                |");
 	}
 }

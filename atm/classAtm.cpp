@@ -40,7 +40,7 @@ void Atm::run()
 		Sleep(2000);
 		cardReader.display("|    CARD IN     |\n");  //18 CHARACTERS
 		screen.deleteInsideFrame();
-		screen.printInsideFrame("	   PLEASE LOG IN TO SYSTEM        ", 6);
+		screen.printInsideFrame("	 PLEASE LOG IN TO SYSTEM        ", 6);
 		string id;
 		do
 		{
@@ -49,8 +49,8 @@ void Atm::run()
 			keyboard.dataIn(id);
 			if (bankDatabase.ifAccountCreated(id) == false)
 			{
-				screen.printInsideFrame("\a        ACCOUNT NOT FOUND         ", 10);
-				screen.printInsideFrame("     ENTER AGAIN OR CANCEL (Y/N) ? ", 12);
+				screen.printInsideFrame("\a           ACCOUNT NOT FOUND       ", 10);
+				screen.printInsideFrame("      ENTER AGAIN OR CANCEL (Y/N) ? ", 12);
 				int f = keyboard.getInt();
 				if (f == 'Y' || f == 'y') {
 					screen.deleteInsideFrame();
@@ -58,8 +58,8 @@ void Atm::run()
 				}
 				else {
 					screen.deleteInsideFrame();
-					screen.printInsideFrame("   THANK YOU FOR USING OUR SERVICES  ", 8);
-					screen.printInsideFrame("     GOODBYE AND SEE YOU AGAIN      ", 10);
+					screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
+					screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
 					cardReader.display("|    CARD OUT    |\n");  //18 CHARACTERS
 					//bill.print();
 					//f_hoadon.close();
@@ -169,8 +169,8 @@ void Atm::run()
 				case '0':
 				{
 					screen.deleteInsideFrame();
-					screen.printInsideFrame("   THANK YOU FOR USING OUR SEVICES      ", 8);
-					screen.printInsideFrame("      GOODBYE AND SEE YOU AGAIN         ", 10);
+					screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
+					screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
 					cardReader.display("|    CARD OUT    |\n");  //18 CHARACTERS
 					//f_hoadon.close();
 					//hoaDon.inHoaDon();
@@ -188,8 +188,8 @@ void Atm::run()
 					}
 					else {
 						screen.deleteInsideFrame();
-						screen.printInsideFrame("   THANK YOU FOR USING OUR SERVICES  ", 8);
-						screen.printInsideFrame("     GOODBYE AND SEE YOU AGAIN      ", 10);
+						screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
+						screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
 						cardReader.display("|    CARD OUT    |\n");  //17 CHARACTERS
 						//bill.print();
 						//f_hoadon.close();
@@ -212,8 +212,8 @@ void Atm::run()
 			}
 			else {
 				screen.deleteInsideFrame();
-				screen.printInsideFrame("   THANK YOU FOR USING OUR SERVICES  ", 8);
-				screen.printInsideFrame("     GOODBYE AND SEE YOU AGAIN      ", 10);
+				screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
+				screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
 				cardReader.display("|    CARD OUT    |\n"); //17 CHARACTERS
 				//bill.print();
 				//f_hoadon.close();
@@ -257,8 +257,8 @@ void Atm::run()
 				if (g == 'N' || g == 'n')
 				{
 					screen.deleteInsideFrame();
-					screen.printInsideFrame("   THANK YOU FOR USING OUR SERVICES  ", 8);
-					screen.printInsideFrame("     GOODBYE AND SEE YOU AGAIN      ", 10);
+					screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
+					screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
 					cardReader.display("|    CARD OUT    |\n"); //17 CHARACTERS
 					
 					//f_hoadon.close();
