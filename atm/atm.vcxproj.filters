@@ -18,6 +18,9 @@
     <Text Include="ReadMe.txt" />
     <Text Include="ClientAccount.txt" />
     <Text Include="MoneyInBank.txt" />
+    <Text Include="TransactionDiary.txt" />
+    <Text Include="ReceiptBudffer.txt" />
+    <Text Include="BlackAccount.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -50,6 +53,12 @@
     <ClInclude Include="classAtm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="classBlackAccountList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classBlackAccountObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -80,6 +89,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="classAtm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="classBlackAccountList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="classBlackAccountObserver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

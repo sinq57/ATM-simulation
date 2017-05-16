@@ -7,10 +7,10 @@
 //**  Using data from temporary file : "BillBuffer.txt"
 //*****************************************************
 
-class Bill
+class Receipt
 {
 public:
-	Bill();
+	Receipt();
 	void print();
 private:
 };

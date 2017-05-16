@@ -1,13 +1,13 @@
 #include "stdafx.h"
 using namespace std;
 
-Bill::Bill()
+Receipt::Receipt()
 {
 	
 
 }
 
-void Bill::print()
+void Receipt::print()
 {
 	Screen screen;
 	int count = 0;

@@ -8,17 +8,17 @@ class Account
 public:
 	Account();
 	void setBlockState(int);
-	int getBlockState();
+	int getBlockState() const;
 
 	void setCardId(string);
-	string getCardId();
+	string getCardId() const;
 
 	void setPin(string);
-	string getPin();
+	string getPin() const;
 
 	void setBalance(int);
-	double getBalance();
-private:
+	double getBalance() const;
+protected:
 	int blockState;  // '1': blocked
 	string cardId;
 	string pin;

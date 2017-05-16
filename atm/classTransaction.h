@@ -8,13 +8,15 @@ class Transaction
 {
 public:
 	Transaction();
-	void checkBalance();
+	Transaction(FILE*, FILE*);
 	void payTool(string id, BankDatabase * bankDatabase);
 	void mobilePopup(string id, BankDatabase* bankDatabase);
-	void printStatement(); //in sao kê
+	void fastCash(string id, BankDatabase* bankDatabase, CashBox *cashBox);
 	void withdraw(string id, BankDatabase* bankDatabase, CashBox *cashBox);
 	void transfer(string id, BankDatabase* bankDatabase);
-
+	void saveHistory();
+	FILE* get;
 private:
-
+	FILE *fileDiary;
+	FILE *fileReceipt;
 };

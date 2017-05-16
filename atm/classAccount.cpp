@@ -14,7 +14,7 @@ void Account::setBlockState(int a)
 	blockState = a;
 }
 
-int Account::getBlockState()
+int Account::getBlockState() const
 {
 	return blockState;
 }
@@ -23,7 +23,7 @@ void Account::setBalance(int a)
 	balance = a;
 }
 
-double Account::getBalance()
+double Account::getBalance() const
 {
 	return balance;
 }
@@ -33,17 +33,17 @@ void Account::setCardId(string a)
 	cardId = a;
 }
 
-string Account::getCardId()
+string Account::getCardId() const
 {
 	return cardId;
 }
 
-void Account::setPin(string a)
+void Account::setPin(string a) 
 {
 	pin = a;
 }
 
-string Account::getPin()
+string Account::getPin() const
 {
 	return pin;
 }

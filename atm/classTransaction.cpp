@@ -6,6 +6,12 @@ Transaction::Transaction()
 
 }
 
+Transaction::Transaction(FILE* fDiary, FILE* fReceipt)
+{
+	fileDiary = fDiary;
+	fileReceipt = fReceipt;
+}
+
 //void Transaction::checkBalance()
 //{
 //}
@@ -67,7 +73,7 @@ LABEL1:
 	}
 	string code[] = { "3425 4563 6435", "6547 4356 3456", "5467 3463 2467", "3545 9999 5680", "3456 6733 3556","1234 5435 2352","2353 3532 1364" };
 LABEL2:
-	Sleep(3000);
+	Sleep(100);
 	screen.deleteInsideFrame();
 	screen.printInsideFrame("            CHOOSE THE FOLLOWING" , 6);
 	screen.printInsideFrame("      1: 50 $     2: 20 $    3: 10 $    ", 8);
@@ -132,6 +138,7 @@ LABEL2:
 			if (mny > (bankDatabase->getAccountArray() + i)->getBalance())
 			{
 				screen.loading();
+				screen.deleteInsideFrame();
 				screen.printInsideFrame("      YOU DO NOT HAVE ENOUGH MONEY!    ", 8);
 				screen.printInsideFrame("  ENTER AMOUNT AGAIN OR CANCEL (Y/N) ? ", 10);
 				int g = keyboard.getInt();
@@ -147,41 +154,45 @@ LABEL2:
 			else
 			{
 				//hatKyGiaoDichMRT.luuGiaoDich();
-				/*
+				saveHistory();
 				switch (k) {
 					case '1': {
-						f_diary << "T-MOBILE POPUP :";
-						f_hoadon << "T-MOBILE POPUP :";
+						fprintf(fileDiary, ": T-MOBILE TOPUP: ");
+						fprintf(fileReceipt, ": T-MOBILE TOPUP: ");
 						break;
 					}
 					case '2': {
-						f_diary << "HEYAH POPUP :";
-						f_hoadon << "HEYAH POPUP :";
+						fprintf(fileDiary, ": HEYAH TOPUP: ");
+						fprintf(fileReceipt, ": HEYAH TOPUP: ");
 						break;
 					}
 					case '3': {
-						f_diary << "LYCAMOBILE POPUP :";
-						f_hoadon << "LYCAMOBILE POPUP :";
+						fprintf(fileDiary, ": LYCAMOBILEE TOPUP: ");
+						fprintf(fileReceipt, ": LYCAMOBILE TOPUP: ");
 						break;
 					}
 					case '4': {
-						f_diary << "ORANGE POPUP :";
-						f_hoadon << "ORANGE POPUP :";
+						fprintf(fileDiary, ": ORANGE TOPUP: ");
+						fprintf(fileReceipt, ": ORANGE TOPUP: ");
 						break;
 					}
 				}
-				f_diary << mny << " : ";
-				f_hoadon << mny << " : ";
-				*/
+				fprintf(fileDiary, "%.2f | ", mny);
+				fprintf(fileReceipt, "%.2f | ", mny);
+				
 				screen.loading();
+				screen.deleteInsideFrame();
 				bankDatabase->substractMoney(id, mny);
 				screen.deleteInsideFrame();
-				screen.printInsideFrame("   MA THE CUA BAN: ", 8);
+				screen.printInsideFrame("   YOUR CODE IS: ", 8);
 				srand(time(0));
 				h = rand() % 6 + 1;
 				screen.dataOut(code[h]);
 				screen.printInsideFrame("          POPUP SUCCEEDED :)        ", 10);
 				screen.printInsideFrame("       CONTINUE OR NOT (Y/N) ? ", 12);
+
+				fprintf(fileDiary, "code: %s", code[h].c_str());
+				fprintf(fileReceipt, "code: %s", code[h].c_str());
 				break;
 			}
 		}
@@ -194,7 +205,9 @@ void Transaction::payTool(string id, BankDatabase* bankDatabase)
 	Screen screen;
 	Keyboard keyboard;
 	double mny;
+	screen.deleteInsideFrame();
 LABEL0:
+	screen.printInsideFrame("            CHOOSE THE FOLLOWING  ", 6);
 	screen.printInsideFrame("         1.INSUARANCE    2.TELEPHONE ", 8);
 	screen.printInsideFrame("         3.INTERNET      4.GAS      ", 10);
 LABEL1:
@@ -239,13 +252,48 @@ LABEL1:
 					return;
 				}
 			}
-			else
+			else //(mny <= (bankDatabase->getAccountArray() + i)->getBalance())
 			{
-				//  Luu nhat khi giao dich tai day
+				//  save history here
+				saveHistory();
+				switch (c)
+				{
+					case '1':
+					{
+						fprintf(fileDiary, ": %s\n", id.c_str());
+						fprintf(fileDiary, ": Insuarace Payment: ");
+						fprintf(fileReceipt, ": Insuarace Payment: ");
+						break;
+					}
+					case '2':
+					{
+						fprintf(fileDiary, ": %s\n", id.c_str());
+						fprintf(fileDiary, ": Telephone Payment: ");
+						fprintf(fileReceipt, ": Telephone Payment: ");
+						break;
+					}
+					case '3':
+					{
+						fprintf(fileDiary, ": %s\n", id.c_str());
+						fprintf(fileDiary, ": Internet Payment: ");
+						fprintf(fileReceipt, ": Internet Payment: ");
+						break;
+					}
+					case '4':
+					{
+						fprintf(fileDiary, ": %s\n", id.c_str());
+						fprintf(fileDiary, ": Gas Payment: ");
+						fprintf(fileReceipt, ": Gas Payment: ");
+						break;
+					}
+				}
 
+				fprintf(fileDiary, "%.2f", mny);
+				fprintf(fileReceipt, "%.2f", mny);
 				//**************************************
 
 				screen.loading();
+				screen.deleteInsideFrame();
 				bankDatabase->substractMoney(id, mny);
 				screen.deleteInsideFrame();
 				screen.printInsideFrame("          PAYMENT SUCCEEDED !    ", 8);
@@ -257,21 +305,172 @@ LABEL1:
 
 }
 
-void Transaction::printStatement() // in sao ke ( statement)
+
+void Transaction::fastCash(string id, BankDatabase* bankDatabase, CashBox *cashBox)
 {
-	Keyboard keyboard;
 	Screen screen;
+	Keyboard keyboard;
+	
+	int withdrawnMoneyArray[10]; // array consits of  withdrawn money number;
+
+	Money* moneyArrayPtr = cashBox->getMoneyArray();
+	Account* accountArrayPtr = bankDatabase->getAccountArray();
+LABEL0:
+	screen.deleteInsideFrame();
+
+	screen.printInsideFrame("            CHOOSE THE FOLLOWING  ", 6);
+	screen.printInsideFrame("      1: 50 $     2: 100 $   3: 150 $   ", 8);
+	screen.printInsideFrame("      4: 200 $    5: 400 $   6: 500 $   ", 10);
+
+	int h = keyboard.getInt();
+
+	double withdrawnAmount;
+	switch (h)
+	{
+		case '1':
+		{
+			withdrawnAmount = 50;
+			break;
+		}
+		case '2':
+		{
+			withdrawnAmount = 100;
+			break;
+		}
+		case '3':
+		{
+			withdrawnAmount = 150;
+			break;
+		}
+		case '4':
+		{
+			withdrawnAmount = 200;
+			break;
+		}
+		case '5':
+		{
+			withdrawnAmount = 400;
+			break;
+		}
+		case '6':
+		{
+			withdrawnAmount = 500;
+			break;
+		}
+		default:
+		{
+			screen.deleteInsideFrame();
+			screen.printInsideFrame("\a WRONG! CHOOSE AGAIN OR CANCEL (Y/N) ? ", 12);
+			int s = keyboard.getInt();
+			if (s == 'Y' || s == 'y') {
+				//screen.deleteInsideFrame();
+				goto LABEL0;
+			}
+			else {
+				screen.deleteInsideFrame();
+				screen.printInsideFrame("         FAST CASH CANCELED !     ", 10);
+				screen.printInsideFrame("     CONTINUE TRANSACTION (Y/N) ? ", 12);
+				return;
+			}
+		}
+	}
 
 
+	for (int i = 1; i <= bankDatabase->getAccountQuantity(); i++)
+	{
+		if ((accountArrayPtr + i)->getCardId() == id)
+		{
+			//
+			double moneyLeft = (accountArrayPtr + i)->getBalance();
+		//LABEL1:
+			screen.loading();
+			screen.deleteInsideFrame();
+			if (withdrawnAmount > cashBox->totalMoney())
+			{
+				screen.deleteInsideFrame();
+				screen.printInsideFrame("   SORRY, NOT ENOUGH MONEY IN ATM!!\a", 10);
+				screen.printInsideFrame("       CONTINUE TRANSACTION (Y/N) ? ", 12);
+				h = keyboard.getInt();
+				if (h == 'Y' || h == 'y') goto LABEL0;
+				else 
+				{
+					screen.deleteInsideFrame();
+					screen.printInsideFrame("     FAST CASH TRANSACTION CANCELED ! ", 8);
+					screen.printInsideFrame("       CONTINUE TRANSACTION (Y/N) ? ", 10);
+					return;
+				}
+			}
+			else // (withdrawnAmount <= cashBox->totalMoney()) 
+			{
+				if (withdrawnAmount > moneyLeft)
+				{
+					screen.printInsideFrame("   NOT ENOUGH MONEY IN YOUR ACCOUNT!!\a", 10);
+					screen.printInsideFrame("    DO YOU WANT TO CHOOSE AGAIN (Y/N) ?  ", 12);
+					int k = keyboard.getInt();
+					if (k == 'Y' || k == 'y') goto LABEL0;
+					else
+					{
+						screen.deleteInsideFrame();
+						screen.printInsideFrame("     FAST CASH TRANSACTION CANCELED ! ", 8);
+						screen.printInsideFrame("       CONTINUE TRANSACTION (Y/N) ? ", 10);
+						return;
+					}
+				}
+				else  //(withdrawnAmount <= moneyLeft)
+				{
+					screen.deleteInsideFrame();
+					screen.printInsideFrame("        FAST CASH SUCCEEDED :)   ", 6);
+					screen.printInsideFrame("  ", 8);
+					moneyLeft -= withdrawnAmount;
+
+					//LUU NHAT KI GIAO DICH
+					saveHistory();
+					fprintf(fileDiary, ": %s\n", id.c_str());
+					fprintf(fileDiary, ": fast cash: %.2f | ", withdrawnAmount);
+					fprintf(fileReceipt, ": fast cash: %.2f | ", withdrawnAmount);
+					//*********************
+
+					for (int j = 1; j <= cashBox->getDenominationNumber(); j++) withdrawnMoneyArray[j] = 0;
+					for (int j = 1; j <= cashBox->getDenominationNumber(); j++)
+					{
+						while ((moneyArrayPtr + j)->getDenomination() <= withdrawnAmount && (moneyArrayPtr + j)->getNumber() > 0 && withdrawnAmount > 0)
+						{
+							withdrawnAmount -= (moneyArrayPtr + j)->getDenomination();
+							withdrawnMoneyArray[j]++;
+						}
+					}
+
+					for (int j = 1; j <= cashBox->getDenominationNumber(); j++)
+					{
+						screen.dataOut((moneyArrayPtr + j)->getDenomination());
+						screen.dataOut("$: ");
+						screen.dataOut(withdrawnMoneyArray[j]);
+						screen.dataOut("  ");
+						if (withdrawnMoneyArray[j] != 0)
+						{
+							fprintf(fileDiary, "%d x %d $ | ", withdrawnMoneyArray[j], (moneyArrayPtr + j)->getDenomination());
+							fprintf(fileReceipt, "%d x %d $ | ", withdrawnMoneyArray[j], (moneyArrayPtr + j)->getDenomination());
+						}
+					}
+					(accountArrayPtr + i)->setBalance(moneyLeft);
+					screen.printInsideFrame("     CONTINUE TRANSACTION (Y/N) ? ", 10);
+
+				}
+			}
+		}
+	}
 }
+
 
 void Transaction::withdraw(string id, BankDatabase* bankDatabase, CashBox *cashBox)
 {
 	Screen screen;
 	Keyboard keyboard;
-	Bill bill;
-	double withdrawAmount;
-	int withdrawnMoneyArray[10];
+	//Receipt receipt;
+	double withdrawnAmount;
+
+	int withdrawnMoneyArray[10]; // array consits of  withdrawn money number;
+	
 	Money* moneyArrayPtr = cashBox->getMoneyArray();
 	Account* accountArrayPtr = bankDatabase->getAccountArray();
 
@@ -285,9 +484,9 @@ void Transaction::withdraw(string id, BankDatabase* bankDatabase, CashBox *cashB
 			screen.deleteInsideFrame();
 			screen.printInsideFrame("         WITHDRAW TRAMSACTION:", 6);
 			screen.printInsideFrame("         ENTER MONEY AMOUNT: ", 8);
-			keyboard.dataIn(withdrawAmount);
+			keyboard.dataIn(withdrawnAmount);
 			double intPart;  // must use 'modf' because "%" (mod) is olny for int
-			double fractPart = modf(withdrawAmount / 5, &intPart);
+			double fractPart = modf(withdrawnAmount / 5, &intPart);
 			if (fractPart != 0)
 			{
 				screen.printInsideFrame("    WITHDRAW MUST BE MULTIPLE OF 5 !", 10);
@@ -310,7 +509,8 @@ void Transaction::withdraw(string id, BankDatabase* bankDatabase, CashBox *cashB
 
 			}
 			screen.loading();
-			if (withdrawAmount > cashBox->totalMoney())
+			screen.deleteInsideFrame();
+			if (withdrawnAmount > cashBox->totalMoney())
 			{
 				screen.deleteInsideFrame();
 				screen.printInsideFrame("   SORRY, NOT ENOUGH MONEY IN ATM!!\a", 10);
@@ -326,7 +526,7 @@ void Transaction::withdraw(string id, BankDatabase* bankDatabase, CashBox *cashB
 			}
 			else
 			{
-				if (withdrawAmount > moneyLeft)
+				if (withdrawnAmount > moneyLeft)
 				{
 					screen.printInsideFrame("   NOT ENOUGH MONEY IN YOUR ACCOUNT!!\a", 10);
 					screen.printInsideFrame("    DO YOU WANT TO ENTER AGAIN (Y/N) ?  ", 12);
@@ -343,30 +543,42 @@ void Transaction::withdraw(string id, BankDatabase* bankDatabase, CashBox *cashB
 				else
 				{
 					screen.deleteInsideFrame();
-					screen.printInsideFrame("          WITHDRAW SUCCESS :)     ", 6);
+					screen.printInsideFrame("       WITHDRAWAL SUCCEEDED :)   ", 6);
 					screen.printInsideFrame("  ", 8);
-					moneyLeft -= withdrawAmount;
+					moneyLeft -= withdrawnAmount;
+					
+					//LUU NHAT KI GIAO DICH
+					saveHistory();
+					fprintf(fileDiary, ": %s\n", id.c_str());
+					fprintf(fileDiary, ": Witdraw: %.2f | ", withdrawnAmount);
+					fprintf(fileReceipt, ": Witdraw: %.2f | ", withdrawnAmount);
+					//*********************
+
 					for (int j = 1; j <= cashBox->getDenominationNumber(); j++) withdrawnMoneyArray[j] = 0;
 					for (int j = 1; j <= cashBox->getDenominationNumber(); j++)
 					{
-						while ((moneyArrayPtr + j)->getDenomination() <= withdrawAmount && (moneyArrayPtr + j)->getNumber() > 0 && withdrawAmount > 0)
+						while ((moneyArrayPtr + j)->getDenomination() <= withdrawnAmount && (moneyArrayPtr + j)->getNumber() > 0 && withdrawnAmount > 0)
 						{
-							withdrawAmount -= (moneyArrayPtr + j)->getDenomination();
+							withdrawnAmount -= (moneyArrayPtr + j)->getDenomination();
 							withdrawnMoneyArray[j]++;
 						}
 					}
+
 					for (int j = 1; j <= cashBox->getDenominationNumber(); j++)
 					{
 						screen.dataOut((moneyArrayPtr + j)->getDenomination());
 						screen.dataOut("$: ");
 						screen.dataOut(withdrawnMoneyArray[j]);
 						screen.dataOut("  ");
-
+						if (withdrawnMoneyArray[j] != 0)
+						{
+							fprintf(fileDiary, "%d x %d $ | ",  withdrawnMoneyArray[j], (moneyArrayPtr + j)->getDenomination() );
+							fprintf(fileReceipt, "%d x %d $ | ", withdrawnMoneyArray[j], (moneyArrayPtr + j)->getDenomination());
+						}
 					}
 					(accountArrayPtr + i)->setBalance(moneyLeft);
 					screen.printInsideFrame("     CONTINUE TRANSACTION (Y/N) ? ", 10);
-					//LUU NHAT KI GIAO DICH
-
+					
 				}
 			}
 		}
@@ -381,6 +593,7 @@ void Transaction::transfer(string id, BankDatabase* bankDatabase)
 	Screen screen;
 	Keyboard keyboard;
 	CardReader cardReader;
+	
 	Account* accountArrayPtr = bankDatabase->getAccountArray();
 
 	for (int i = 1; i <= bankDatabase->getAccountQuantity(); i++)
@@ -415,11 +628,11 @@ void Transaction::transfer(string id, BankDatabase* bankDatabase)
 				{
 				LABEL2:
 					screen.deleteInsideFrame();
-					Sleep(300);
+					//Sleep(50);
 					screen.printInsideFrame("    ENTER TRANSFER AMOUNT: ", 8);
-					double amount;
-					keyboard.dataIn(amount);
-					if (amount > (accountArrayPtr + i)->getBalance())
+					double transferAmount;
+					keyboard.dataIn(transferAmount);
+					if (transferAmount > (accountArrayPtr + i)->getBalance())
 					{
 						screen.printInsideFrame("    YOU DON NOT HAVE ENOUGH MONEY !!!", 10);
 						screen.printInsideFrame("     CONTINUE TRANSACTION (Y/N) ? ", 12);
@@ -434,17 +647,21 @@ void Transaction::transfer(string id, BankDatabase* bankDatabase)
 						}
 
 					}
-					else  //(amount <= (accountArrayPtr + i)->getBalance())
+					else  //(transferAmount <= (accountArrayPtr + i)->getBalance())
 					{
 						screen.loading();
 						screen.deleteInsideFrame();
 						screen.printInsideFrame("     TRANSACTION SUCCEEDED !!!", 10);
 						screen.printInsideFrame("     CONTINUE OR NOT (Y/N)) ? ", 12);
-						(accountArrayPtr + i)->setBalance((accountArrayPtr + i)->getBalance() - amount);
-						(accountArrayPtr + j)->setBalance((accountArrayPtr + j)->getBalance() + amount);
+						(accountArrayPtr + i)->setBalance((accountArrayPtr + i)->getBalance() - transferAmount);
+						(accountArrayPtr + j)->setBalance((accountArrayPtr + j)->getBalance() + transferAmount);
 						bankDatabase->updateAccount();
 
 						// tramsaction history ????? 
+						saveHistory();
+						fprintf(fileDiary, ": %s\n", id.c_str());
+						fprintf(fileDiary, ": Transfer to %s : %.2f $", receiver.c_str(), transferAmount);
+						fprintf(fileReceipt, ": Transfer to %s : %.2f $", receiver.c_str(), transferAmount);
 						return;
 					}
 				}
@@ -468,4 +685,14 @@ void Transaction::transfer(string id, BankDatabase* bankDatabase)
 
 		}
 	}
+}
+
+void Transaction::saveHistory()
+{
+	time_t rawtime;
+	time(&rawtime);
+	char str[26];
+	ctime_s(str, sizeof(str), &rawtime);
+	fprintf(fileDiary, "\n\nTime %s", str);
+	fprintf(fileReceipt, "\n\nTime %s", str);
 }

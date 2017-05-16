@@ -14,19 +14,67 @@ int Keyboard::getInt()
 
 int Keyboard::getChar()
 {
+	//char k= _getch();
 	char k = _getch();
 	return k;
 }
 
 void Keyboard::dataIn(string &a)
 {
+	//cin.sync();
+	cin.ignore();
 	cin >> a;
+	
 }
 
 void Keyboard::dataIn(double &a)
 {
+	cin.ignore();
+	cin >> a;
+
+}
+
+void Keyboard::dataIn(char &a)
+{
+	cin.ignore();
 	cin >> a;
 }
+
+void Keyboard::dataIn(int &a)
+{
+	cin.ignore();
+	cin >> a;
+}
+
+string Keyboard::enterPassword()
+{
+	string pwd = "";
+	char c;
+	do 
+	{
+			c = _getch();
+			switch (c)
+			{
+			case 0://special keys. like: arrows, f1-12 etc.
+				_getch();//just ignore also the next character.
+				break;
+			case 13://enter
+				break;
+			case 8://backspace
+				if (pwd.length() > 0) {
+					pwd.erase(pwd.end() - 1); //remove last character from string
+					cout << c << ' ' << c;//go back, write space over the character and back again.
+				}
+				break;
+			default://regular ascii
+				pwd += c;//add to string
+				cout << "*";//print '*'
+				break;
+			}
+	} while (c != 13); //enter
+	return pwd;
+}
+
 
 Screen::Screen()
 {
@@ -54,7 +102,7 @@ void Screen::dataOut(char a)
 	cout << a;
 }
 
-void Screen::display(string a, string b)
+void Screen::initialdisplay()
 {
 	system("color 67");
 	dataOut( "\n");
@@ -75,20 +123,22 @@ void Screen::display(string a, string b)
 	//dataOut( " ");
 	printDash();
 	dataOut( "| PAY TOOL - 3 |");
-	dataOut( a );
+	//dataOut( a );
+	dataOut("                                          ");
 	dataOut( "| 4 -  POPUP    |\n");
 	printDash();
 	//dataOut( " ");
 	printDash();
 	dataOut( "| BALANCE  - 5 |");
-	dataOut( b );
+	//dataOut( b );
+	dataOut("                                          ");
 	dataOut( "| 6 -CHANGE PIN |\n");
 	printDash();
 	//dataOut( " ");
 	printDash();
-	dataOut( "|   BILL   - 7 |");
+	dataOut( "|  FAST $  - 7 |");
 	for (int i=1; i<=42; i++) dataOut( " ");
-	dataOut( "|  0 - EXIT !   |");
+	dataOut( "| 0 -  EXIT !   |");
 	dataOut( "\n|");
 	for (int i=1; i<=13; i++) dataOut( "-");
 	dataOut( "  ");
@@ -168,7 +218,7 @@ void Screen::loading()  // time emulator for reading card and executing transact
 {
 	printInsideFrame("            ", 12);
 	Sleep(300);
-	for (int i = 1; i <= 10; i++) {
+	for (int i = 1; i < 10; i++) {
 		dataOut(". ");
 		Sleep(200);
 	}

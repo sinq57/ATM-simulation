@@ -16,8 +16,11 @@ public:
 	Keyboard();
 	void dataIn(string&);
 	void dataIn(double&);
+	void dataIn(char &);
+	void dataIn(int &);
 	int getInt();
 	int getChar();
+	string enterPassword();
 private:
 };
 
@@ -29,13 +32,14 @@ public:
 	void dataOut(int);
 	void dataOut(double);
 	void dataOut(char);
-	void display(string a, string b);
+	void initialdisplay();
 	void makeBackgroundColor();
 	void printDash();
 	void decorate();
 	void clearScreen();
 	void loading();
 	void goToXY(int x, int y);
+
 	void printInsideFrame(string, int);
 	void deleteInsideFrame();
 

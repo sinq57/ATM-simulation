@@ -22,6 +22,10 @@
 #include <windows.h>
 #include <iomanip>
 #include <cmath>
+#include <stdio.h>
+#include <algorithm>
+#include <memory>
+#include <Windows.h>
 
 #include "hardware.h"
 #include "classMoney.h"
@@ -30,4 +34,8 @@
 #include "classBill.h"
 #include "classTransaction.h"
 #include "classBankDatabase.h"
+#include "classBlackAccountList.h"
+#include "classBlackAccountObserver.h"
 #include "classAtm.h"
+
+

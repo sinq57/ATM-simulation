@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="2f8f9b25-15b0-4e99-8099-d727009e7a0c" name="atm" linkedPackageId="6baeaa1d-5420-4ea0-ad1f-b7ca3c4196e3" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="f806373d-6f20-471e-b485-6985dc1c99e9" name="Customer" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e948f3dc-dc33-42d7-aa88-b1478f905ba6" />
+        <targetEnds>
+          <association Id="911137a9-025c-44a1-aa43-9cf82175610b" isDerived="false" sourceEndRoleName="Customer" targetEndRoleName="Session" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="1a22bce6-b792-464d-abaa-cb237d06a233" LastKnownName="Session" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d8768a56-5327-4d8a-8601-aef452c576e8" name="Customer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b5adbf7b-14d9-4fef-90e3-4c2f6b49f144" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b4bd6683-532b-46e9-a61a-0d55707af972" name="Session" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="true" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a9ebe23f-3d4c-4dd0-a101-9f66c5697ab3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0a673432-423c-4d04-988f-201e125a2840" />
+          </association>
+          <association Id="29c70d26-e992-4fa0-b780-000714347bb4" isDerived="false" sourceEndRoleName="Customer" targetEndRoleName="insert card" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="df8faba8-19fd-4dcd-9923-35cba7a7bfb5" LastKnownName="insert card" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b0863d04-cd31-4b79-9ea6-c386ee4b1b49" name="Customer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="21ff67cc-ae19-477a-92cb-5ab29f13ea75" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d0ec0857-f8ab-47e6-8888-6816e4db35af" name="insert card" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="2ab75fbd-057a-43e0-8e91-006be0136b43" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="8a3bf4c2-711a-4d87-9eb7-80fd61df32e6" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" name="ATMsystem" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3335b889-5055-410b-8582-250a2e6bb92b" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="0df4a58b-a12a-40fd-9574-fef9d0ab76e7" name="check balance" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="56280fd9-615c-4dee-8fdb-bab4f96b8e87" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="778b4d8a-ecea-4b7a-944c-ed89eaa40132" name="withdraw" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="91301d7a-8761-4eb4-b29c-bc917c44e32c" />
+        <additions>
+          <include Id="28ed3003-de06-4308-b87a-1bf44ef17f66">
+            <useCaseMoniker Id="1f79672b-a0b0-4f53-b5bb-78a8b944320b" LastKnownName="enter money" />
+            <elementDefinition Id="845b18ac-ba4b-48e8-991f-d50e8e8e908b" />
+          </include>
+          <include Id="76a402cc-ae8e-462b-8a35-b327bcdceb33">
+            <useCaseMoniker Id="0dccac8e-869e-4cc9-8402-c5c674b4de26" LastKnownName="update database" />
+            <elementDefinition Id="2b8da37a-51df-422a-9ce7-f9d6780b6bf5" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="140d50cf-6476-4910-acd7-309ab4451080" name="Transfer" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b0fd67a1-d976-4436-b446-1f18e7e17ec7" />
+        <additions>
+          <include Id="45aeff74-8310-4a91-bbca-4e89ccbbb5eb">
+            <useCaseMoniker Id="1f79672b-a0b0-4f53-b5bb-78a8b944320b" LastKnownName="enter money" />
+            <elementDefinition Id="64f948b2-6a0e-4aa4-8eff-fb9c16e0c279" />
+          </include>
+          <include Id="85f224bf-c83d-4bce-a6d4-f13f330316a2">
+            <useCaseMoniker Id="ec2eca09-24ec-41c1-8fda-adaa292896d2" LastKnownName="give receiver" />
+            <elementDefinition Id="7822761c-5fd4-4504-8ada-6ca386031794" />
+          </include>
+          <include Id="7898a8c4-6b79-44e5-ae9d-067dc3c33af6">
+            <useCaseMoniker Id="0dccac8e-869e-4cc9-8402-c5c674b4de26" LastKnownName="update database" />
+            <elementDefinition Id="dbdaff67-91fd-4c3d-b4eb-809c37e68d90" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="67905a56-dfec-4bbf-805a-79825b42eed6" name="PIN verification" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="048670ef-9eda-4285-bd4f-aab92411b313" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="fb669093-ee6f-460e-9241-313a504415ad" name="payment tool" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4b3e89af-fdb7-44a6-9c5a-a1696b5e93f0" />
+        <additions>
+          <include Id="19341cb2-23ac-435b-bfb8-30fc669dee64">
+            <useCaseMoniker Id="88907fc6-7164-4936-8d69-4fde76a0c261" LastKnownName="chose tool" />
+            <elementDefinition Id="8ba2808b-5175-4f1a-bbbb-62273ed07537" />
+          </include>
+          <include Id="7d8285a9-a509-46aa-93f4-05d137b95953">
+            <useCaseMoniker Id="1f79672b-a0b0-4f53-b5bb-78a8b944320b" LastKnownName="enter money" />
+            <elementDefinition Id="1fc712be-467e-4e69-ab21-4c87fbd9cadb" />
+          </include>
+          <include Id="2f35a367-3bf3-4733-9ca1-b51b5d6f4e9a">
+            <useCaseMoniker Id="0dccac8e-869e-4cc9-8402-c5c674b4de26" LastKnownName="update database" />
+            <elementDefinition Id="379f1ad5-0acb-4665-95fd-296d3f05b042" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="ca2bace0-bffa-4606-8867-c4c370fb57b3" name="login" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5c0341d2-3153-4c72-8a54-101c0ce4aa0b" />
+        <extendedCases>
+          <extend Id="5550d256-2209-4c26-b275-6f35e755db1b">
+            <useCaseMoniker Id="67905a56-dfec-4bbf-805a-79825b42eed6" LastKnownName="PIN verification" />
+            <elementDefinition Id="9b46d19e-4cf0-4931-a3a9-40f18fb7bab0" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="1a22bce6-b792-464d-abaa-cb237d06a233" name="Session" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8ccf21c6-c59d-4802-923b-315fd91a660a" />
+        <additions>
+          <include Id="390a6dfe-ff94-4cc6-a5bd-c8e924d2e62e">
+            <useCaseMoniker Id="ca2bace0-bffa-4606-8867-c4c370fb57b3" LastKnownName="login" />
+            <elementDefinition Id="52777e77-ec92-434a-ac5d-390b5ffaf290" />
+          </include>
+          <include Id="1f3c697c-01ba-42d2-9a45-311bf09b1e09">
+            <useCaseMoniker Id="d90b41e3-9c28-460d-ab29-5c7edbc78349" LastKnownName="Transaction" />
+            <elementDefinition Id="0fd122c0-dbc0-4f33-8126-c33475f49a8b" />
+          </include>
+          <include Id="83178e4f-7e15-4964-8683-129eec89461f">
+            <useCaseMoniker Id="81263574-baa6-4a0b-bc7a-0312d4cdf3d4" LastKnownName="exit" />
+            <elementDefinition Id="d9332300-ca98-4c2f-b661-ebf5bfa40214" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="81263574-baa6-4a0b-bc7a-0312d4cdf3d4" name="exit" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="dbe6a4e1-98e4-41b1-8ae7-c89e5d4a4662" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="d90b41e3-9c28-460d-ab29-5c7edbc78349" name="Transaction" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="728e9b68-f6c1-4a96-a721-a811fd8cd99a" />
+        <additions>
+          <include Id="787c6e2a-8bc0-475d-8cb3-4248c757aa07">
+            <useCaseMoniker Id="fb669093-ee6f-460e-9241-313a504415ad" LastKnownName="payment tool" />
+            <elementDefinition Id="0eab4a57-1c70-46a7-bb5f-191b9f4e0b49" />
+          </include>
+          <include Id="72055295-e477-4a9a-9c73-b838e418201f">
+            <useCaseMoniker Id="140d50cf-6476-4910-acd7-309ab4451080" LastKnownName="Transfer" />
+            <elementDefinition Id="730d853d-1585-4376-ab38-6af362a8175d" />
+          </include>
+          <include Id="0b2f3568-d853-4e56-b08c-3de0b95096a1">
+            <useCaseMoniker Id="d27a7415-932a-495e-b7e2-be7bef0d243e" LastKnownName="Mobile topup" />
+            <elementDefinition Id="c483f5f2-7d18-4360-841c-685dcbf6c3c9" />
+          </include>
+          <include Id="800d90e5-c581-4d43-afe9-f983507fdb66">
+            <useCaseMoniker Id="18f939d7-2473-46c1-bcee-0b36b9aaa34a" LastKnownName="change PIN" />
+            <elementDefinition Id="7ee6064d-fd92-458c-85b8-f6372911275d" />
+          </include>
+          <include Id="8834395e-ae57-4469-8939-93bee0c56a09">
+            <useCaseMoniker Id="0df4a58b-a12a-40fd-9574-fef9d0ab76e7" LastKnownName="check balance" />
+            <elementDefinition Id="26113209-a716-468e-95c8-e862eec12cab" />
+          </include>
+          <include Id="d042e27d-156a-4440-8689-80507cb3775d">
+            <useCaseMoniker Id="778b4d8a-ecea-4b7a-944c-ed89eaa40132" LastKnownName="withdraw" />
+            <elementDefinition Id="c52ef917-7205-441e-b475-67fa635a26d2" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="df8faba8-19fd-4dcd-9923-35cba7a7bfb5" name="insert card" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ea509f19-7581-4378-b070-102d76844e25" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="d27a7415-932a-495e-b7e2-be7bef0d243e" name="Mobile topup" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="76e6e659-5794-4d1a-a955-6623784128e9" />
+        <additions>
+          <include Id="ae7cdffa-bafe-4249-ac35-d7d1cb88e4c7">
+            <useCaseMoniker Id="2c4db67d-ad1d-4d60-8e9c-b78f5184978d" LastKnownName="Choose operator" />
+            <elementDefinition Id="bef824e9-4f9f-487e-a0ec-8a07529d180c" />
+          </include>
+          <include Id="8b2466a6-e3f3-4c09-8049-fefadd5a6081">
+            <useCaseMoniker Id="1f79672b-a0b0-4f53-b5bb-78a8b944320b" LastKnownName="enter money" />
+            <elementDefinition Id="e125e12e-3d47-4132-83fb-1d7d8a3f2d29" />
+          </include>
+          <include Id="4a970988-87bf-463e-96d8-ac7713f7dcab">
+            <useCaseMoniker Id="0dccac8e-869e-4cc9-8402-c5c674b4de26" LastKnownName="update database" />
+            <elementDefinition Id="8df1bc1b-f2d3-4b39-a494-de9a70adfb44" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="2c4db67d-ad1d-4d60-8e9c-b78f5184978d" name="Choose operator" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="91834804-2296-4efc-a33f-061ccad42f2a" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="ec2eca09-24ec-41c1-8fda-adaa292896d2" name="give receiver" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="06971502-f806-408d-b605-0285f16704d6" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="1f79672b-a0b0-4f53-b5bb-78a8b944320b" name="enter money" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4dfa6664-73b9-455e-9e9a-d4cf812a4dfe" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="88907fc6-7164-4936-8d69-4fde76a0c261" name="chose tool" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="101c313f-5aab-441d-9c53-a8a7bbfce181" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="18f939d7-2473-46c1-bcee-0b36b9aaa34a" name="change PIN" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="28dbd965-3ce0-4bd9-8781-75ab53764881" />
+        <additions>
+          <include Id="0c781726-4b29-40b8-a8f8-66cdd59ec663">
+            <useCaseMoniker Id="67905a56-dfec-4bbf-805a-79825b42eed6" LastKnownName="PIN verification" />
+            <elementDefinition Id="17b69c41-7bac-423e-a612-fe7c00664813" />
+          </include>
+          <include Id="9246e271-993a-4f32-8289-a0f9f5de9b81">
+            <useCaseMoniker Id="732ec110-259e-456f-ad95-e350a7b1453c" LastKnownName="enter new  PIN" />
+            <elementDefinition Id="b47bebf1-c6c3-4ea1-8380-9ab884432760" />
+          </include>
+          <include Id="b5828677-1696-4307-a8cb-91057514b3f4">
+            <useCaseMoniker Id="0dccac8e-869e-4cc9-8402-c5c674b4de26" LastKnownName="update database" />
+            <elementDefinition Id="9b6a60d9-3fea-4d1d-9813-55bd176fba37" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="732ec110-259e-456f-ad95-e350a7b1453c" name="enter new  PIN" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8048855d-d54b-407f-a86f-c08b20523a2c" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="6792ec7a-9b0b-402f-9653-e4b56594b3f1" name="DATABASE" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a8ede3e1-aecc-4f4a-8d08-2fba3c53fb53" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="0dccac8e-869e-4cc9-8402-c5c674b4de26" name="update database" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="480b84bf-7958-437b-b00f-1555f6b840f3" />
+        <suppliersInternal>
+          <dependency Id="c0031735-52cd-4157-bd2c-4879eaeeefda">
+            <subsystemMoniker Id="6792ec7a-9b0b-402f-9653-e4b56594b3f1" LastKnownName="DATABASE" />
+            <elementDefinition Id="3f7598c6-5356-4ac1-8e93-64e7f863912f" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <actor Id="1de871a3-98cd-4a0c-bc25-a8be0b326d8d" name="Bank employee" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="91052be8-58ea-4af3-aba6-977ed5a2ac46" />
+        <targetEnds>
+          <association Id="fae14477-ba1e-40eb-8f02-13c6d832ef12" isDerived="false" sourceEndRoleName="Bank employee" targetEndRoleName="Verification" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="4a5914ec-aeb1-451e-9f2d-5fc7b67020e3" LastKnownName="Verification" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6c9c1658-52bf-46f5-9e55-a922ec1aff8d" name="Bank employee" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c3cf8de3-ddea-4977-9f91-7a884416a33a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b3d10772-b044-4d48-a123-cb5461f5f2fa" name="Verification" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ad728e11-ad87-4298-a3df-532beb1d48af" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1254c10f-3b45-473d-913e-f46e84e6f677" />
+          </association>
+          <association Id="1ba2602a-1713-444e-8a90-f678607f55c7" isDerived="false" sourceEndRoleName="Bank employee" targetEndRoleName="Unblock all&#xD;&#xA;account" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="ea01dda0-51a4-4aa9-9225-03216caa116d" LastKnownName="Unblock all&#xD;&#xA;account" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="77909e85-5ac2-479a-bb89-7921e73657c1" name="Bank employee" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ab568dfd-c70f-4c4b-9d01-bb0596ad7676" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="585c3aca-640c-42a8-8bed-fddc148559b1" name="Unblock all&#xD;&#xA;account" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ae152ef1-afd5-4afb-bc36-17987d26235b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c4171b4f-fde6-420a-9007-bc18b641eb34" />
+          </association>
+          <association Id="a7a989d1-324a-4f39-b06b-f7c70c2a848e" isDerived="false" sourceEndRoleName="Bank employee" targetEndRoleName="Unblock concrete account" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="859a278f-ddbe-42a8-8c66-87c8875cb915" LastKnownName="Unblock concrete account" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5f7dfa69-0b0e-49ae-88e8-b67ea0f96003" name="Bank employee" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1784fd7f-a203-4255-bb35-1c80e943cf1e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2af53c54-3b35-4a80-8d75-3bbf8b7c9a46" name="Unblock concrete account" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="429f7cdb-43a4-439f-a160-e595644eb676" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="cd2ece8e-d4f5-47c5-835d-3a2717e1ebeb" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="4a5914ec-aeb1-451e-9f2d-5fc7b67020e3" name="Verification" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b36456ff-dd05-48ed-a89b-a45003be266d" />
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="ea01dda0-51a4-4aa9-9225-03216caa116d" name="Unblock all&#xD;&#xA;account" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a9d29074-be38-4e27-8fe8-ed9648053332" />
+        <suppliersInternal>
+          <dependency Id="d2636b08-90fa-4068-af2e-a88ef7284ae7">
+            <subsystemMoniker Id="6792ec7a-9b0b-402f-9653-e4b56594b3f1" LastKnownName="DATABASE" />
+            <elementDefinition Id="10522ec2-c8c9-4513-9fce-892ed2ae87f9" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="859a278f-ddbe-42a8-8c66-87c8875cb915" name="Unblock concrete account" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="065bb729-cca1-4bb2-81f9-461a423492d9" />
+        <suppliersInternal>
+          <dependency Id="21fb51c0-7ebe-461e-9a77-0805698c910f">
+            <subsystemMoniker Id="6792ec7a-9b0b-402f-9653-e4b56594b3f1" LastKnownName="DATABASE" />
+            <elementDefinition Id="522f5cab-e5b7-48f1-b105-e2b24713a934" />
+          </dependency>
+        </suppliersInternal>
+        <subjects>
+          <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="6baeaa1d-5420-4ea0-ad1f-b7ca3c4196e3" name="ModelingAtm">
+    <elementDefinition Id="343fa5d1-eea1-4278-abea-2fddf99e1e74" />
+    <profileInstances>
+      <packageHasProfileInstances Id="4c961965-8ffe-42b0-bdbd-478a7d741ee3">
+        <profileInstance Id="e35197e1-1acb-49fe-8980-082bb7177671" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="a75675ce-4ea2-439b-8d13-7bc1a27ad736">
+        <profileInstance Id="a94ec425-70e2-47b5-8281-baaeda97a813" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>
