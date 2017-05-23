@@ -19,8 +19,8 @@
     <Text Include="ClientAccount.txt" />
     <Text Include="MoneyInBank.txt" />
     <Text Include="TransactionDiary.txt" />
-    <Text Include="ReceiptBudffer.txt" />
     <Text Include="BlackAccount.txt" />
+    <Text Include="ReceiptBuffer.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -35,16 +35,10 @@
     <ClInclude Include="classBankDatabase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="classBill.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="classMoney.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="classTransaction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="classTransactionHis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hardware.h">
@@ -59,6 +53,9 @@
     <ClInclude Include="classBlackAccountObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="classReceipt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -70,16 +67,10 @@
     <ClCompile Include="classBankDatabase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="classBill.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="classMoney.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="classTransaction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="classTransactionHis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hardware.cpp">
@@ -95,6 +86,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="classBlackAccountObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="classReceipt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

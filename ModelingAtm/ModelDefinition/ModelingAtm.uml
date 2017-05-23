@@ -638,45 +638,6 @@
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="8f5cd976-1ca1-410a-a050-d49c89c1787c"
-            isDerived="false"
-            sourceEndRoleName="Atm"
-            targetEndRoleName="TransactionHistory"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="847a125f-5fef-4f96-bf3b-35e11422eb5a"
-              LastKnownName="TransactionHistory"
-              LastKnownLocation="ModelingAtm.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="ed2c38d6-bc32-4f39-bbad-0c4ba085ce39"
-                  name="Atm"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="Shared"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="6eb2279c-09ea-46f5-a872-f808230c6f98"
-                  name="TransactionHistory"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
             Id="e700f120-6b3b-423e-af28-337594f6fa34"
             isDerived="false"
             sourceEndRoleName="Atm"
@@ -1585,33 +1546,6 @@
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <class
-        Id="847a125f-5fef-4f96-bf3b-35e11422eb5a"
-        name="TransactionHistory"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false">
-        <ownedOperationsInternal>
-          <operation
-            Id="35c5e533-84bb-44c2-89f6-01dc834c8725"
-            name="save"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="d179f3b4-0277-4c63-b8ea-cc4061593337"
-            name="TransactionHistory"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-        </ownedOperationsInternal>
-      </class>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <actor
         Id="e948f3dc-dc33-42d7-aa88-b1478f905ba6"
         name="Customer"
@@ -1769,7 +1703,7 @@
             Id="7822761c-5fd4-4504-8ada-6ca386031794">
             <useCaseMoniker
               Id="06971502-f806-408d-b605-0285f16704d6"
-              LastKnownName="give receiver"
+              LastKnownName="enter receiver id"
               LastKnownLocation="ModelingAtm.uml" />
           </include>
           <include
@@ -2039,7 +1973,7 @@
     <packageHasNamedElement>
       <useCase
         Id="06971502-f806-408d-b605-0285f16704d6"
-        name="give receiver"
+        name="enter receiver id"
         isAbstract="false"
         isLeaf="false">
         <subjects>

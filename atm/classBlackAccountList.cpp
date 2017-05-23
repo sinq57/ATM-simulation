@@ -153,3 +153,13 @@ void BlackAccountList::setBlockStateOfAccount(string id, int blockState)
 		}
 	}
 }
+
+BlackAccountList::~BlackAccountList()
+{
+	for (BAObserverI it = observers.begin(); it != observers.end(); ++it)
+	{
+		delete *it;
+	}
+	observers.clear();
+	blockState = 0;
+}

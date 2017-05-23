@@ -22,27 +22,27 @@ int Keyboard::getChar()
 void Keyboard::dataIn(string &a)
 {
 	//cin.sync();
-	cin.ignore();
+	//cin.ignore();
 	cin >> a;
 	
 }
 
 void Keyboard::dataIn(double &a)
 {
-	cin.ignore();
+	//cin.ignore();
 	cin >> a;
 
 }
 
 void Keyboard::dataIn(char &a)
 {
-	cin.ignore();
+	//cin.ignore();
 	cin >> a;
 }
 
 void Keyboard::dataIn(int &a)
 {
-	cin.ignore();
+	//cin.ignore();
 	cin >> a;
 }
 
@@ -104,7 +104,7 @@ void Screen::dataOut(char a)
 
 void Screen::initialdisplay()
 {
-	system("color 67");
+	//system("color 17");
 	dataOut( "\n");
 	decorate();
 	dataOut( "|                           WELCOME TO WBK BANK                           | \n");
@@ -148,13 +148,13 @@ void Screen::initialdisplay()
 	//dataOut( " ");
 	dataOut("|\n\n");
 	dataOut( " ----------------------------  ----------------  ------------------------- \n");
-	dataOut( "|                            |  | 1 | 2 | 3 |  |         WBK BANK         |\n");
-	dataOut( "|                            |  -------------  |                          |\n");
-	dataOut( "|     |----------------|     |  | 4 | 5 | 6 |  |            WE            |\n");
-	dataOut( "|     |  INSERT CARD   |     |  -------------  |                          |\n");
-	dataOut( "|     |  -----------   |     |  | 7 | 8 | 9 |  |        WILL HOLD         |\n");
+	dataOut( "|                            |  | 1 | 2 | 3 |  |                          |\n");
+	dataOut( "|                            |  -------------  |         RECEIPT          |\n");
+	dataOut( "|     |----------------|     |  | 4 | 5 | 6 |  |    |----------------|    |\n");
+	dataOut( "|     |  INSERT CARD   |     |  -------------  |    |----------------|    |\n");
+	dataOut( "|     |  -----------   |     |  | 7 | 8 | 9 |  |                          |\n");
 	dataOut( "|     |     HELLO      |     |  -------------  |                          |\n");
-	dataOut( "|     |----------------|     |  | Y | 0 | N |  |        YOUR TRUST        |\n");
+	dataOut( "|     |----------------|     |  | Y | 0 | N |  |                          |\n");
 	dataOut( "|                            |  -------------  |                          |\n");
 	dataOut( " ----------------------------  ---------------  --------------------------\n");
 	decorate();
@@ -173,7 +173,7 @@ void Screen::decorate()
 
 void Screen::makeBackgroundColor()
 {
-	system("color 17");
+	system("color 17"); //system("color 07"); // default
 }
 
 void Screen::printDash()
@@ -261,7 +261,12 @@ void CashBox::updateMoney()
 {
 	ofstream f_money("MoneyInBank.txt");
 	for (int i = 1; i <= denominationNumber; i++)
-		f_money << moneyArray[i].getDenomination() << " " << moneyArray[i].getNumber() << endl;
+	{
+		if (i != denominationNumber)
+			f_money << moneyArray[i].getDenomination() << " " << moneyArray[i].getNumber() << endl;
+		else
+			f_money << moneyArray[i].getDenomination() << " " << moneyArray[i].getNumber();
+	}
 	f_money.close();
 }
 

@@ -282,22 +282,6 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="12ce49b6-e8b5-464e-86cd-9df1f0a01935" />
           </association>
-          <association Id="b22aa3b0-8c3a-47ee-a90f-da89eba1d699" isDerived="false" sourceEndRoleName="Atm" targetEndRoleName="TransactionHistory" isLeaf="false" isAbstract="false">
-            <classMoniker Id="bfcad1af-b03a-44f2-a7d6-7d7017811254" LastKnownName="TransactionHistory" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="b97c812f-cdf0-4a05-8538-22e4cd282be4" name="Atm" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="ed2c38d6-bc32-4f39-bbad-0c4ba085ce39" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="35141b96-6f39-4251-bbb5-696198296b7b" name="TransactionHistory" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="6eb2279c-09ea-46f5-a872-f808230c6f98" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="8f5cd976-1ca1-410a-a050-d49c89c1787c" />
-          </association>
           <association Id="759cf3d2-ff00-4232-825a-0d11757fd2d3" isDerived="false" sourceEndRoleName="Atm" targetEndRoleName="Transaction" isLeaf="false" isAbstract="false">
             <classMoniker Id="e56046d9-18d1-41d0-843c-dbe8f46e9354" LastKnownName="Transaction" />
             <relationshipOwnedElementsInternal>
@@ -725,19 +709,6 @@
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
-          </operation>
-        </ownedOperationsInternal>
-      </class>
-    </logicalClassDesignerModelHasTypes>
-    <logicalClassDesignerModelHasTypes>
-      <class Id="bfcad1af-b03a-44f2-a7d6-7d7017811254" name="TransactionHistory" isAbstract="false" isLeaf="false" isActiveClass="false">
-        <elementDefinition Id="847a125f-5fef-4f96-bf3b-35e11422eb5a" />
-        <ownedOperationsInternal>
-          <operation Id="0ad09021-7400-4bb8-94b0-4863ad657053" name="save" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="35c5e533-84bb-44c2-89f6-01dc834c8725" />
-          </operation>
-          <operation Id="fd5b6187-923c-4b2b-a586-f372ab6b75f4" name="TransactionHistory" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="d179f3b4-0277-4c63-b8ea-cc4061593337" />
           </operation>
         </ownedOperationsInternal>
       </class>

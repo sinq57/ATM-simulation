@@ -80,7 +80,7 @@
             <elementDefinition Id="64f948b2-6a0e-4aa4-8eff-fb9c16e0c279" />
           </include>
           <include Id="85f224bf-c83d-4bce-a6d4-f13f330316a2">
-            <useCaseMoniker Id="ec2eca09-24ec-41c1-8fda-adaa292896d2" LastKnownName="give receiver" />
+            <useCaseMoniker Id="ec2eca09-24ec-41c1-8fda-adaa292896d2" LastKnownName="enter receiver id" />
             <elementDefinition Id="7822761c-5fd4-4504-8ada-6ca386031794" />
           </include>
           <include Id="7898a8c4-6b79-44e5-ae9d-067dc3c33af6">
@@ -240,7 +240,7 @@
       </useCase>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <useCase Id="ec2eca09-24ec-41c1-8fda-adaa292896d2" name="give receiver" isAbstract="false" isLeaf="false">
+      <useCase Id="ec2eca09-24ec-41c1-8fda-adaa292896d2" name="enter receiver id" isAbstract="false" isLeaf="false">
         <elementDefinition Id="06971502-f806-408d-b605-0285f16704d6" />
         <subjects>
           <subsystemMoniker Id="b8d9428c-c7f4-4c4e-b5d2-c80e445d796c" LastKnownName="ATMsystem" />

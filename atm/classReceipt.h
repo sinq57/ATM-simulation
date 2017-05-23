@@ -11,6 +11,8 @@ class Receipt
 {
 public:
 	Receipt();
+	Receipt(FILE*);
 	void print();
 private:
+	FILE *fileReceipt;
 };

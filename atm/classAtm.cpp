@@ -6,7 +6,7 @@ Atm::Atm()
 
 }
 
-Atm::Atm(FILE* fDiary, FILE* fReceipt) : transactionHistory(fDiary, fReceipt), transaction(fDiary, fReceipt), bankDatabase(fDiary, fReceipt) //, keyboard(), screen(), cardReader(),
+Atm::Atm(FILE* fDiary, FILE* fReceipt) : transaction(fDiary, fReceipt), bankDatabase(fDiary, fReceipt), receipt(fReceipt) //, keyboard(), screen(), cardReader(),
 {
 }
 
@@ -41,8 +41,8 @@ void Atm::run()
 		screen.makeBackgroundColor();
 	INITIAL:
 		screen.printInsideFrame("    WBK BANK - WHERE YOUR TRUST IS HOLD   ", 6);
-		screen.printInsideFrame("               PLEASE CHOOSE: ", 8);
-		screen.printInsideFrame("        1: BANK EMPLOYEE   2: CLIENT ", 10);
+		screen.printInsideFrame("              PLEASE CHOOSE: ", 8);
+		screen.printInsideFrame("       1: BANK EMPLOYEE   2: CLIENT ", 10);
 		int m = keyboard.getChar();
 		if (m == '1')
 		{
@@ -51,14 +51,6 @@ void Atm::run()
 			screen.deleteInsideFrame();
 			screen.printInsideFrame("     PLEASE ENTER PASSWORD: ", 8);
 		PASSWORDAGAIN:
-			/*
-			for (int j = 1; j <= 6; j++) {
-				char i = keyboard.getChar();
-				screen.dataOut("*");
-				pwd += i;
-			}
-			keyboard.getInt(); //press Enter after pwd
-			*/
 			pwd = keyboard.enterPassword();
 			if (pwd != "wbkwro")
 			{
@@ -169,7 +161,7 @@ void Atm::run()
 			else // m != 1, 2
 			{
 				screen.deleteInsideFrame();
-				screen.printInsideFrame("           WRONG! PLEASE CHOOSE AGAIN ", 8);
+				screen.printInsideFrame("       WRONG! PLEASE CHOOSE AGAIN", 8);
 				Sleep(1500);
 				goto INITIAL1;
 			}
@@ -185,7 +177,6 @@ void Atm::run()
 			screen.printInsideFrame("                 ... insert card to start", 14);
 			 m = keyboard.getChar();
 			//keyboard.dataIn(m);
-			//Sleep(100);
 			cardReader.display("|    CARD IN     |\n");  //18 CHARACTERS
 			screen.deleteInsideFrame();
 			screen.printInsideFrame("	 PLEASE LOG IN TO SYSTEM        ", 6);
@@ -209,8 +200,6 @@ void Atm::run()
 						screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
 						screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
 						cardReader.display("|    CARD OUT    |\n");  //18 CHARACTERS
-						//bill.print();
-						//f_hoadon.close();
 						Sleep(2000);
 						return;
 					}
@@ -218,21 +207,10 @@ void Atm::run()
 				else break;
 			} while (bankDatabase.ifAccountCreated(id) == false);
 
-			//f_diary << "\n\n" << ten << endl;
-			//f_hoadon << ten << endl;
-
 		STARTAGAIN:
 			string pin = "";
 			screen.printInsideFrame("     ENTER 6-DIGIT PIN: ", 10);
-			/*
-			for (int j = 1; j <= 6; j++) {
-				char i = keyboard.getChar();
-				screen.dataOut("*");
-				pin += i;
-			}
-			keyboard.getInt(); //press Enter after pin
-
-			*/
+			
 			pin = keyboard.enterPassword();
 			screen.loading();
 			if (bankDatabase.checkPin(id, pin))
@@ -258,8 +236,6 @@ void Atm::run()
 				screen.printInsideFrame("           LOG IN SUCCEEDED !      ", 8);
 				screen.printInsideFrame("          WELCOM TO WBK BANK !  ", 10);
 				cardReader.display("| CARD ACCEPTED  |\n");
-				//Sleep(1500);
-
 
 				screen.deleteInsideFrame();
 			LABEL:
@@ -267,96 +243,96 @@ void Atm::run()
 				int n = keyboard.getInt();
 				switch (n)
 				{
-				case '1':
-				{
-					screen.deleteInsideFrame();
-					screen.printInsideFrame("             WITHDRAW TRANSACTION ", 6);
-					//bankDatabase.withdraw(id, cashBox);
-					Sleep(1000);
-					transaction.withdraw(id, getBankDatabase(), getCashBox());
-					break;
-				}
-				case '2':
-				{
-					screen.deleteInsideFrame();
-					screen.printInsideFrame("             MONEY TRANSFER          ", 6);
-					//bankDatabase.transfer(id);
-					Sleep(1000);
-					transaction.transfer(id, getBankDatabase());
-					break;
-				}
-				case '3':
-				{
-					screen.deleteInsideFrame();
-					screen.printInsideFrame("             PAYMENT TOOLS          ", 6);
-					Sleep(1000);
-					transaction.payTool(id, getBankDatabase());
-					break;
-				}
-				case '4':
-				{
-					screen.deleteInsideFrame();
-					screen.printInsideFrame("             MOBILE POPUP          ", 6);
-					Sleep(1000);
-					transaction.mobilePopup(id, getBankDatabase());
-					break;
-				}
-				case '5':
-				{
-					screen.deleteInsideFrame();
-					screen.printInsideFrame("             CHECK BALANCE          ", 6);
-					Sleep(1000);
-					bankDatabase.checkBalance(id);
-					break;
-				}
-				case '6':
-				{
-					screen.deleteInsideFrame();
-					screen.printInsideFrame("             CHANGE PIN             ", 6);
-					Sleep(1000);
-					bankDatabase.changePin(id);
-					break;
-				}
-				case '7':
-				{
-					screen.deleteInsideFrame();
-					screen.printInsideFrame("             FAST CASH              ", 6);
-					Sleep(1000);
-					transaction.fastCash(id, getBankDatabase(), getCashBox());
-					break;
-				}
-				case '0':
-				{
-					screen.deleteInsideFrame();
-					screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
-					screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
-					cardReader.display("|    CARD OUT    |\n");  //18 CHARACTERS
-					//f_hoadon.close();
-					//hoaDon.inHoaDon();
-					return;
-				}
-				default:
-				{
-					screen.printInsideFrame("\a  WRONG! CHOOSE AGAIN OR CANCEL (Y/N) ? ", 12);
-					int zz = keyboard.getInt();
-					if (zz == 'Y' || zz == 'y') {
+					case '1':
+					{
 						screen.deleteInsideFrame();
-						Sleep(200);
-						goto LABEL;
+						screen.printInsideFrame("             WITHDRAW TRANSACTION ", 6);
+						//bankDatabase.withdraw(id, cashBox);
+						Sleep(1000);
+						transaction.withdraw(id, getBankDatabase(), getCashBox());
+						break;
 					}
-					else {
+					case '2':
+					{
+						screen.deleteInsideFrame();
+						screen.printInsideFrame("             MONEY TRANSFER          ", 6);
+						//bankDatabase.transfer(id);
+						Sleep(1000);
+						transaction.transfer(id, getBankDatabase());
+						break;
+					}
+					case '3':
+					{
+						screen.deleteInsideFrame();
+						screen.printInsideFrame("             PAYMENT TOOLS          ", 6);
+						Sleep(1000);
+						transaction.payTool(id, getBankDatabase());
+						break;
+					}
+					case '4':
+					{
+						screen.deleteInsideFrame();
+						screen.printInsideFrame("             MOBILE POPUP          ", 6);
+						Sleep(1000);
+						transaction.mobilePopup(id, getBankDatabase());
+						break;
+					}
+					case '5':
+					{
+						screen.deleteInsideFrame();
+						screen.printInsideFrame("             CHECK BALANCE          ", 6);
+						Sleep(1000);
+						bankDatabase.checkBalance(id);
+						break;
+					}
+					case '6':
+					{
+						screen.deleteInsideFrame();
+						screen.printInsideFrame("             CHANGE PIN             ", 6);
+						Sleep(1000);
+						bankDatabase.changePin(id);
+						break;
+					}
+					case '7':
+					{
+						screen.deleteInsideFrame();
+						screen.printInsideFrame("             FAST CASH              ", 6);
+						Sleep(1000);
+						transaction.fastCash(id, getBankDatabase(), getCashBox());
+						break;
+					}
+					case '0':
+					{
 						screen.deleteInsideFrame();
 						screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
 						screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
-						cardReader.display("|    CARD OUT    |\n");  //17 CHARACTERS
-						//bill.print();
+						cardReader.display("|    CARD OUT    |\n");  //18 CHARACTERS
 						//f_hoadon.close();
-
-						Sleep(2000);
+						//hoaDon.inHoaDon();
 						return;
 					}
+					default:
+					{
+						screen.printInsideFrame("\a  WRONG! CHOOSE AGAIN OR CANCEL (Y/N) ? ", 12);
+						int zz = keyboard.getInt();
+						if (zz == 'Y' || zz == 'y') {
+							screen.deleteInsideFrame();
+							Sleep(200);
+							goto LABEL;
+						}
+						else {
+							screen.deleteInsideFrame();
+							screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
+							screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
+							cardReader.display("|    CARD OUT    |\n");  //17 CHARACTERS
+							//bill.print();
+							//f_hoadon.close();
 
-				}
+							Sleep(2000);
+							return;
+						}
+
+					}
 
 				}
 
@@ -365,35 +341,24 @@ void Atm::run()
 				int c = keyboard.getInt();
 				if (c == 'Y' || c == 'y') {
 					screen.deleteInsideFrame();
-					//Sleep(200);
 					goto LABEL;
 				}
 				else {
 					screen.deleteInsideFrame();
 					screen.printInsideFrame("     DO YOU WANT TO PRINT BILL ??? : ", 8);
 					c = keyboard.getInt();
-					if (c == 'Y' || c == 'y') {
-						//screen.deleteInsideFrame();
-						//***************************************************
-						// print bill
-						//**************************************************
-					}
-					else
+					if (c == 'Y' || c == 'y') 
 					{
-
+						receipt.print();
 					}
+
 					screen.deleteInsideFrame();
 					screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
 					screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
 					cardReader.display("|    CARD OUT    |\n"); //17 CHARACTERS
-					//bill.print();
-					//f_hoadon.close();
-
 					Sleep(2000);
-					break;
+					return;
 				}
-
-
 			}
 			else // bankDatabase.checkPin(id, pin) = false
 			{
@@ -423,8 +388,8 @@ void Atm::run()
 				else //tryTime != 0 and bankDatabase.checkPin(id, pin) = false
 				{
 					screen.deleteInsideFrame();
-					screen.printInsideFrame("\a               WRONG PIN !!!        ", 6);
-					screen.printInsideFrame("  	           TRYTIME LEFT: ", 8);
+					screen.printInsideFrame("\a              WRONG PIN !!!        ", 6);
+					screen.printInsideFrame("  	       TRYTIME LEFT: ", 8);
 					screen.dataOut(tryTime);
 					screen.printInsideFrame("         CONTINUE OR CANCEL (Y/N) ? ", 10);
 					int g = keyboard.getInt();
@@ -434,9 +399,6 @@ void Atm::run()
 						screen.printInsideFrame("     THANK YOU FOR USING OUR SEVICES    ", 8);
 						screen.printInsideFrame("        GOODBYE AND SEE YOU AGAIN       ", 10);
 						cardReader.display("|    CARD OUT    |\n"); //17 CHARACTERS
-
-						//f_hoadon.close();
-						//hoaDon.inHoaDon();
 						return;
 					}
 					else {
@@ -451,17 +413,29 @@ void Atm::run()
 		else
 		{
 			screen.deleteInsideFrame();
-			screen.printInsideFrame("           WRONG! PLEASE CHOOSE AGAIN",8);
-			Sleep(1500);
+			screen.printInsideFrame("       WRONG! PLEASE CHOOSE AGAIN",8);
+			Sleep(1000);
+			screen.deleteInsideFrame();
 			goto INITIAL;
 		}
 	}
-	//f_hoadon.close();
-	//hoaDon.inHoaDon();
-
 }
 
 BlackAccountList* Atm::getBlackAccountList()
 {
 	return &blackAccountList;
+}
+
+bool Atm::ifReceiptCreated()
+{
+	int count = 0;
+	char a[100];
+	FILE * fileReceipt = transaction.getFileReceipt();
+	fseek(fileReceipt, 0, SEEK_SET); // seek to beginning of file
+	while (fgets(a, 100, fileReceipt) != NULL)
+	{
+		count++;
+	}
+	if (count > 0) return true;
+	else return false;
 }

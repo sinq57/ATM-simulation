@@ -19,6 +19,7 @@ public:
 	bool check(string id);
 	void setBlockStateOfAccount(string id, int blockState);
 	vector<BlackAccountObserver*> getObservers();
+	~BlackAccountList();
 private:
 	vector<BlackAccountObserver*> observers;
 	int blockState;  // '1': blocked

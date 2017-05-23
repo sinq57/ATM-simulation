@@ -15,7 +15,7 @@ public:
 	void withdraw(string id, BankDatabase* bankDatabase, CashBox *cashBox);
 	void transfer(string id, BankDatabase* bankDatabase);
 	void saveHistory();
-	FILE* get;
+	FILE* getFileReceipt();
 private:
 	FILE *fileDiary;
 	FILE *fileReceipt;

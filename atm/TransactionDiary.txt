@@ -65,3 +65,111 @@ Time Fri May 12 06:30:55 2017
 Time Fri May 12 06:31:35 2017
 : 120200140014
 : Witdraw: 5.00 | 1 x 5 $ | 
+
+Time Wed May 17 00:33:26 2017
+: 120200110011
+: Witdraw: 5.00 | 1 x 5 $ | 
+
+Time: Wed May 17 00:37:43 2017
+: 120200140014
+: Check account balance: 58040.00 $
+
+Time: Wed May 17 00:52:21 2017
+: 120200140014
+: Check account balance: 58040.00 $
+
+Time: Wed May 17 02:54:56 2017
+: 120200140014
+: Check account balance: 58040.00 $
+
+Time Wed May 17 02:57:16 2017
+: 120200140014
+: Witdraw: 10.00 | 1 x 10 $ | 
+
+Time Wed May 17 03:21:35 2017
+: 120200140014
+: Witdraw: 30.00 | 1 x 20 $ | 1 x 10 $ | 
+
+Time Wed May 17 03:24:53 2017
+: 120200140014
+: Witdraw: 30.00 | 1 x 20 $ | 1 x 10 $ | 
+
+Time Wed May 17 03:25:10 2017
+: 120200140014
+: fast cash: 50.00 | 1 x 50 $ | 
+
+Time Wed May 17 03:41:42 2017
+: 120200140014
+: Witdraw: 30.00 | 1 x 20 $ | 1 x 10 $ | 
+
+Time Wed May 17 03:41:55 2017
+: 120200140014
+: fast cash: 50.00 | 1 x 50 $ | 
+
+Time Wed May 17 04:34:01 2017
+: 120200140014
+: Witdraw: 10.00 | 1 x 10 $ | 
+
+Time: Wed May 17 04:34:09 2017
+: 120200140014
+: Check account balance: 58030.00 $
+
+Time Wed May 17 04:39:24 2017
+: 120200140014
+: Insuarace Payment: 2.00
+
+Time Wed May 17 05:22:00 2017
+: 120200140014
+: Witdraw: 5.00 | 1 x 5 $ | 
+
+Time Wed May 17 05:24:08 2017
+: 120200140014
+: Witdraw: 5.00 | 1 x 5 $ | 
+
+Time Wed May 17 05:29:01 2017
+: 120200140014
+: Witdraw: 10.00 | 1 x 10 $ | 
+
+Time Wed May 17 05:31:34 2017
+: 120200140014
+: Witdraw: 20.00 | 1 x 20 $ | 
+
+Time Wed May 17 05:37:30 2017
+: 120200140014
+: Witdraw: 20.00 | 1 x 20 $ | 
+
+Time Wed May 17 05:41:44 2017
+: 120200140014
+: Witdraw: 10.00 | 1 x 10 $ | 
+
+Time Wed May 17 06:08:47 2017
+: 120200140014
+: Witdraw: 10.00 | 1 x 10 $ | 
+
+Time: Wed May 17 06:14:35 2017
+: 120200140014
+: Check account balance: 58038.00 $
+
+Time Wed May 17 06:48:01 2017
+: 120200140014
+: Witdraw: 15.00 | 1 x 10 $ | 1 x 5 $ | 
+
+Time Wed May 17 06:52:23 2017
+: 120200140014
+: Witdraw: 10.00 | 1 x 10 $ | 
+
+Time Wed May 17 06:52:31 2017
+: 120200140014
+: Insuarace Payment: 3.00
+
+Time Wed May 17 06:52:49 2017
+: 120200140014
+: fast cash: 150.00 | 1 x 100 $ | 1 x 50 $ | 
+
+Time Wed May 17 06:57:03 2017
+: 120200140014
+: Witdraw: 20.00 | 1 x 20 $ | 
+
+Time Wed May 17 06:57:13 2017
+: 120200140014
+: Insuarace Payment: 2.00

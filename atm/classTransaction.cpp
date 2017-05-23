@@ -153,8 +153,9 @@ LABEL2:
 			}
 			else
 			{
-				//hatKyGiaoDichMRT.luuGiaoDich();
 				saveHistory();
+				fprintf(fileDiary, ": %s\n", id.c_str());
+				fprintf(fileReceipt, ": %s\n", id.c_str());
 				switch (k) {
 					case '1': {
 						fprintf(fileDiary, ": T-MOBILE TOPUP: ");
@@ -196,6 +197,7 @@ LABEL2:
 				break;
 			}
 		}
+
 	}
 
 }
@@ -256,32 +258,30 @@ LABEL1:
 			{
 				//  save history here
 				saveHistory();
+				fprintf(fileDiary, ": %s\n", id.c_str());
+				fprintf(fileReceipt, ": %s\n", id.c_str());
 				switch (c)
 				{
 					case '1':
 					{
-						fprintf(fileDiary, ": %s\n", id.c_str());
 						fprintf(fileDiary, ": Insuarace Payment: ");
 						fprintf(fileReceipt, ": Insuarace Payment: ");
 						break;
 					}
 					case '2':
 					{
-						fprintf(fileDiary, ": %s\n", id.c_str());
 						fprintf(fileDiary, ": Telephone Payment: ");
 						fprintf(fileReceipt, ": Telephone Payment: ");
 						break;
 					}
 					case '3':
 					{
-						fprintf(fileDiary, ": %s\n", id.c_str());
 						fprintf(fileDiary, ": Internet Payment: ");
 						fprintf(fileReceipt, ": Internet Payment: ");
 						break;
 					}
 					case '4':
 					{
-						fprintf(fileDiary, ": %s\n", id.c_str());
 						fprintf(fileDiary, ": Gas Payment: ");
 						fprintf(fileReceipt, ": Gas Payment: ");
 						break;
@@ -298,13 +298,13 @@ LABEL1:
 				screen.deleteInsideFrame();
 				screen.printInsideFrame("          PAYMENT SUCCEEDED !    ", 8);
 				screen.printInsideFrame("      CONTINUE TRANSACTION (Y/N) ? ", 10);
+				return;
 			}
-
+			
 		}
 	}
 
 }
-
 
 void Transaction::fastCash(string id, BankDatabase* bankDatabase, CashBox *cashBox)
 {
@@ -375,7 +375,6 @@ LABEL0:
 		}
 	}
 
-
 	for (int i = 1; i <= bankDatabase->getAccountQuantity(); i++)
 	{
 		if ((accountArrayPtr + i)->getCardId() == id)
@@ -426,6 +425,7 @@ LABEL0:
 					//LUU NHAT KI GIAO DICH
 					saveHistory();
 					fprintf(fileDiary, ": %s\n", id.c_str());
+					fprintf(fileReceipt, ": %s\n", id.c_str());
 					fprintf(fileDiary, ": fast cash: %.2f | ", withdrawnAmount);
 					fprintf(fileReceipt, ": fast cash: %.2f | ", withdrawnAmount);
 					//*********************
@@ -448,19 +448,21 @@ LABEL0:
 						screen.dataOut("  ");
 						if (withdrawnMoneyArray[j] != 0)
 						{
+							int moneyBeforeSubstract = (moneyArrayPtr + j)->getNumber();
 							fprintf(fileDiary, "%d x %d $ | ", withdrawnMoneyArray[j], (moneyArrayPtr + j)->getDenomination());
 							fprintf(fileReceipt, "%d x %d $ | ", withdrawnMoneyArray[j], (moneyArrayPtr + j)->getDenomination());
+							(moneyArrayPtr + j)->setNumber(moneyBeforeSubstract - withdrawnMoneyArray[j]);
 						}
 					}
 					(accountArrayPtr + i)->setBalance(moneyLeft);
+					cashBox->updateMoney();
 					screen.printInsideFrame("     CONTINUE TRANSACTION (Y/N) ? ", 10);
-
+					return;
 				}
 			}
 		}
 	}
 }
-
 
 void Transaction::withdraw(string id, BankDatabase* bankDatabase, CashBox *cashBox)
 {
@@ -550,6 +552,7 @@ void Transaction::withdraw(string id, BankDatabase* bankDatabase, CashBox *cashB
 					//LUU NHAT KI GIAO DICH
 					saveHistory();
 					fprintf(fileDiary, ": %s\n", id.c_str());
+					fprintf(fileReceipt, ": %s\n", id.c_str());
 					fprintf(fileDiary, ": Witdraw: %.2f | ", withdrawnAmount);
 					fprintf(fileReceipt, ": Witdraw: %.2f | ", withdrawnAmount);
 					//*********************
@@ -572,13 +575,16 @@ void Transaction::withdraw(string id, BankDatabase* bankDatabase, CashBox *cashB
 						screen.dataOut("  ");
 						if (withdrawnMoneyArray[j] != 0)
 						{
+							int moneyBeforeSubstract = (moneyArrayPtr + j)->getNumber();
 							fprintf(fileDiary, "%d x %d $ | ",  withdrawnMoneyArray[j], (moneyArrayPtr + j)->getDenomination() );
 							fprintf(fileReceipt, "%d x %d $ | ", withdrawnMoneyArray[j], (moneyArrayPtr + j)->getDenomination());
+							(moneyArrayPtr + j)->setNumber(moneyBeforeSubstract - withdrawnMoneyArray[j]);
 						}
 					}
 					(accountArrayPtr + i)->setBalance(moneyLeft);
+					cashBox->updateMoney();
 					screen.printInsideFrame("     CONTINUE TRANSACTION (Y/N) ? ", 10);
-					
+					return;
 				}
 			}
 		}
@@ -660,6 +666,7 @@ void Transaction::transfer(string id, BankDatabase* bankDatabase)
 						// tramsaction history ????? 
 						saveHistory();
 						fprintf(fileDiary, ": %s\n", id.c_str());
+						fprintf(fileReceipt, ": %s\n", id.c_str());
 						fprintf(fileDiary, ": Transfer to %s : %.2f $", receiver.c_str(), transferAmount);
 						fprintf(fileReceipt, ": Transfer to %s : %.2f $", receiver.c_str(), transferAmount);
 						return;
@@ -694,5 +701,11 @@ void Transaction::saveHistory()
 	char str[26];
 	ctime_s(str, sizeof(str), &rawtime);
 	fprintf(fileDiary, "\n\nTime %s", str);
-	fprintf(fileReceipt, "\n\nTime %s", str);
+	fprintf(fileReceipt, "\n-----------------------------------");
+	fprintf(fileReceipt, "\nTime %s ", str);
+}
+
+FILE* Transaction::getFileReceipt()
+{
+	return fileReceipt;
 }

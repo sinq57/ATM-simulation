@@ -71,7 +71,6 @@ void BankDatabase::createAccountArray()
 	
 }
 
-// // XEM LAI "SAU KHI DA NHAP y/n ??"
 void BankDatabase::changePin(string id)   
 {
 	CardReader cardReader;
@@ -127,6 +126,7 @@ void BankDatabase::changePin(string id)
 					//save history
 					saveHistory();
 					fprintf(fileDiary, ": %s\n", id.c_str());
+					fprintf(fileReceipt, ": %s\n", id.c_str());
 					fprintf(fileDiary, ": PIN changed successfully\n");
 					fprintf(fileReceipt, ": PIN changed successfully\n");
 					return;
@@ -222,7 +222,7 @@ void BankDatabase::substractMoney(string id, double moneyAmount)
 void BankDatabase::checkBalance(string id)
 {
 	Screen screen;
-	TransactionHistory transactionHistory;
+	
 	screen.loading();
 	screen.deleteInsideFrame();
 	for (int i = 1; i <= accountQuantity; i++)
@@ -236,6 +236,7 @@ void BankDatabase::checkBalance(string id)
 			//save history
 			saveHistory();
 			fprintf(fileDiary, ": %s\n", id.c_str());
+			fprintf(fileReceipt, ": %s\n", id.c_str());
 			fprintf(fileDiary, ": Check account balance: %.2f $", accountArray[i].getBalance());
 			fprintf(fileReceipt, ": Check account balance: %.2f $", accountArray[i].getBalance());
 			return;
@@ -250,7 +251,9 @@ void BankDatabase::saveHistory()
 	char str[26];
 	ctime_s(str, sizeof(str), &rawtime);
 	fprintf(fileDiary, "\n\nTime: %s", str);
-	fprintf(fileReceipt, "\n\nTime: %s", str);
+
+	fprintf(fileReceipt, "\n-----------------------------------");
+	fprintf(fileReceipt, "\nTime %s ", str);
 }
 
 void BankDatabase::actualizeBlackAccount(vector<BlackAccountObserver*> &observers)

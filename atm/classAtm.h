@@ -18,6 +18,7 @@ class Atm
 public:
 	Atm();
 	Atm::Atm(FILE* fDiary, FILE* fReceipt);
+	bool ifReceiptCreated();
 	void run();
 	BankDatabase* getBankDatabase();
 	CashBox* getCashBox();
@@ -25,7 +26,7 @@ public:
 
 private:
 	Transaction transaction;
-	TransactionHistory transactionHistory;
+	//TransactionHistory transactionHistory;
 	Keyboard keyboard;
 	Screen screen;
 	CardReader cardReader;
